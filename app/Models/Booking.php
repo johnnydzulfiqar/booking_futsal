@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 
 class Booking extends Model
 {
@@ -18,6 +19,12 @@ class Booking extends Model
         'bukti',
 
     ];
+    public function getFotoBarangAttribute()
+    {
+        $bukti = $this->attributes['bukti'];
+        if (empty($bukti)) return 'https://via.placeholder.com/100?text=Produk';
+        else return Storage::url('img/' . $bukti);
+    }
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id');

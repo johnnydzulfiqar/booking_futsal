@@ -31,15 +31,17 @@
                 </thead>
                 <tbody>
                   @foreach ($booking as $item)
+                  @auth
+                  @if ($user_id = Auth::user()->id === $item->user_id)  
                   <tr>
                                 
                   <td>{{ $loop->iteration }}</td>
                   <td>{{ $item->user->name }}</td>
                   <td>{{ $item->lapangan->nama }}</td>
                   @if (is_null($item->bukti))
-                  <td><a href="bayar dp">link ss dp</a></td>
+                  <td><a href="bayar dp">Bayar DP</a></td>
                   @else
-                  <td>{{ $item->bukti }}</td>
+                  <td><img src="{{$item->bukti}}" alt="foto" width="100px"></td>
                   @endif
                 
                   <td>{{ $item->time_from }}</td>  
@@ -49,7 +51,7 @@
 
                   <td>
                     @if ($item->status=='Belum Bayar DP')
-                    <form action="/admin/{{  $item->id }}" method="POST">
+                    <form action="/booking/{{  $item->id }}" method="POST">
                       @csrf
                       @method('delete')
                     <div class="dropdown">
@@ -57,9 +59,9 @@
                         Action
                       </button>
                       <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                        <a class="dropdown-item" href="/admin/{{ $item->id }}/edit"
+                        <a class="dropdown-item" href="/booking/{{ $item->id }}/edit"
                           ><i class="bx bx-edit-alt me-2"></i> Edit</a>
-                          <a class="dropdown-item" href="/admin/{{ $item->id }}/edit"
+                          <a class="dropdown-item" href="/booking/{{ $item->id }}/edit"
                             ><i class="bx bx-edit-alt me-2"></i> Detail</a>
                       </div>
                     </div>
@@ -71,14 +73,16 @@
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
                      
-                        <a class="dropdown-item" href="/admin/{{ $item->id }}/edit"
+                        <a class="dropdown-item" href="/booking/{{ $item->id }}/edit"
                           ><i class="bx bx-edit-alt me-2"></i> Detail</a>
                     </div>
                   </div>
 
                 @endif  
                   </td>        
-                  </tr>            
+                  </tr>  
+                  @endif
+                  @endauth          
                   @endforeach
                 </tbody>
                 <tfoot>

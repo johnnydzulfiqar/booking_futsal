@@ -23,6 +23,8 @@ return new class extends Migration
             $table->datetime('time_from');
             $table->datetime('time_to');
             $table->string('status')->nullable();
+            $table->integer('jam');
+            $table->integer('total_harga');
             $table->timestamps();
         });
     }

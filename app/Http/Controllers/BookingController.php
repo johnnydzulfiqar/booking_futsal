@@ -6,12 +6,14 @@ namespace App\Http\Controllers;
 use App\Models\Lapangan;
 use App\Models\Booking;
 use App\Models\User;
-
+use Carbon\Carbon;
 use PDF;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
+use function PHPUnit\Framework\isNull;
 
 class BookingController extends Controller
 {
@@ -40,6 +42,9 @@ class BookingController extends Controller
         //     $request->bukti->storeAs('bukti', $fileName);
         //     $input['bukti'] = $fileName;
         // }
+        $jam = Carbon::parse($request->time_from)->diffInHours(Carbon::parse($request->time_to));
+
+
         $data = Booking::create(
             [
                 'lapangan_id' => $request['lapangan_id'],
@@ -48,9 +53,11 @@ class BookingController extends Controller
                 'status' => 'Belum Bayar DP',
                 'bukti' => null,
                 'user_id' => Auth::id(),
+                'jam' =>  $jam,
+                'total_harga' => $jam * $request['harga'],
             ]
+
         );
-        dd($data);
         return redirect('/booking/index')->with('success', 'Data Berhasil Disimpan');
     }
     public function show($id)
@@ -72,18 +79,16 @@ class BookingController extends Controller
                 'bukti' => 'mimes:jpg,png|max:1024',
             ];
         $this->validate($request, $rules);
+        $input = $request->all();
+        $input = $request->except('user_id');
         if ($request->hasFile('bukti')) {
             $fileName = $request->bukti->getClientOriginalName();
-            $request->bukti->storeAs('bukti', $fileName);
+            $request->bukti->storeAs('img', $fileName);
+            // Storage::disk('public')->put($fileName, $request->file('bukti'));
             $input['bukti'] = $fileName;
         }
-        $input = Booking::find($request->id);
-        $input->bukti = $request->bukti;
-        $input->save();
-        // // $stok = Admin::find($request->admin_id);
-        // $stok->stok = $request->stok;
-        // $stok->save();
-        dd($booking);
+
+        $booking->update($input);
         return redirect('/booking/index');
     }
     public function destroy($id)

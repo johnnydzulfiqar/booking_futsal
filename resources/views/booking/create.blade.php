@@ -29,8 +29,10 @@ Index User
                     <option value="{{ $item->id }}">{{ $item->nama }}</option>
                     {{-- <option @selected(old('nama_ruangan', @$item->nama_ruangan) == '' ) value="">- Pilih Lantai -</option> --}}
                     {{-- <option @selected(old('id', @$item->id) == @$item->id) value="{{ @$item->id }}">{{ $item->nama_ruangan }}</option> --}}
-                @endforeach
+              
             </select>
+            <input style="display: none;" type="text" hidden name="harga" value="{{ $item->harga }}" class="form-control">
+            @endforeach
             @error('lapangan_id')
             <div class="alert alert-danger">
                 {{ $message }}
@@ -38,7 +40,7 @@ Index User
         @enderror
         <div class="form-group mb-2">
           <label for="time_from">Jam Mulai</label>
-          <input type="text" class="form-control datetimepicker" id="time_from" name="time_from" value="{{ old('time_from') }}" />
+          <input type="text" class="form-control datetimepicker" id="time_from" name="time_from" value="{{ old('time_from', @$booking->time_from) }}" />
           @error('time_from')
             <div class="alert alert-danger">
                 {{ $message }}
@@ -47,16 +49,32 @@ Index User
       </div>
       <div class="form-group mb-2">
           <label for="time_to">Jam Berakir</label>
-          <input type="text" class="form-control datetimepicker" id="time_to" name="time_to" value="{{ old('time_to') }}" />
+          <input type="text" class="form-control datetimepicker" id="time_to" name="time_to" value="{{ old('time_to', @$booking->time_to) }}" />
           @error('time_to')
             <div class="alert alert-danger">
                 {{ $message }}
             </div>
         @enderror
       </div>
-      {{-- <input style="display: none;" type="text" hidden name="user_id" value="{{ Auth::id() }}" class="form-control">
-      <input style="display: none;" type="text" hidden name="status" value="Belum Bayar DP" class="form-control">
-      <input style="display: none;" type="text" hidden name="bukti" value="Belum Kirim DP" class="form-control"> --}}
+      @if (is_null(@$booking->bukti))
+      
+      @else
+      <div class="mb-3 row mt-3">
+        <label for="foto_barang" class="col-sm-2 col-form-label">Foto</label>
+        <div class="col-sm-5">
+          @if(!empty(@$booking->bukti))
+          <img src="{{ $booking->bukti }}" class="mb-3" alt="foto" width="100px" />
+          @endif
+              <input type="file" class="form-control" name="bukti" id="bukti" placeholder="bukti">
+          </div>
+      </div>
+      @error('bukti')
+      <div class="alert alert-danger">
+          {{ $message }}
+      </div>
+      @enderror
+      @endif
+      
      
 
               <div class="row justify-content-end">
