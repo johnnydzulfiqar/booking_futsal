@@ -9,7 +9,7 @@ Index User
     <!-- Basic Layout & Basic with Icons -->
     {{-- <div class="row"> --}}
         <!-- Basic with Icons -->
-        <form action="{{ !empty($booking) ? route('booking.update', $booking): url('booking/create')}}" method="POST" enctype="multipart/form-data">
+        <form action="{{ !empty($booking) ? route('bookingadmin.update', $booking): url('bookingadmin/create')}}" method="POST" enctype="multipart/form-data">
             @if(!empty($booking))
             @method('PATCH')
             @endif
@@ -23,25 +23,28 @@ Index User
           <div class="card-body">
             <form>
               <label for="lapangan_id">Lapangan</label>
-              <select name="lapangan_id" id="lapangan_id" class="form-control">
+              <select name="lapangan_id" id="lapangan_id" class="form-control" disabled>
                 {{-- <option value="">Pilih Ruangan</option> --}}
                 @foreach ($lapangan as $item)
                     <option value="{{ $item->id }}">{{ $item->nama }}</option>
                     {{-- <option @selected(old('nama_ruangan', @$item->nama_ruangan) == '' ) value="">- Pilih Lantai -</option> --}}
                     {{-- <option @selected(old('id', @$item->id) == @$item->id) value="{{ @$item->id }}">{{ $item->nama_ruangan }}</option> --}}
-                    @endforeach
+              
             </select>
-    
             <input style="display: none;" type="text" hidden name="harga" value="{{ $item->harga }}" class="form-control">
-     
+            @endforeach
             @error('lapangan_id')
             <div class="alert alert-danger">
                 {{ $message }}
             </div>
         @enderror
         <div class="form-group mb-2">
+          <label for="time_from">Booking Atas Nama</label>
+          <input type="text" class="form-control" id="nama" name="user_id" value="{{ $booking->user->name }}" disabled/>
+      </div>
+        <div class="form-group mb-2">
           <label for="time_from">Jam Mulai</label>
-          <input type="text" class="form-control datetimepicker" id="time_from" name="time_from" value="{{ old('time_from', @$booking->time_from) }}" />
+          <input type="text" class="form-control datetimepicker" id="time_from" name="time_from" value="{{ old('time_from', @$booking->time_from) }}" disabled/>
           @error('time_from')
             <div class="alert alert-danger">
                 {{ $message }}
@@ -50,34 +53,51 @@ Index User
       </div>
       <div class="form-group mb-2">
           <label for="time_to">Jam Berakir</label>
-          <input type="text" class="form-control datetimepicker" id="time_to" name="time_to" value="{{ old('time_to', @$booking->time_to) }}" />
+          <input type="text" class="form-control datetimepicker" id="time_to" name="time_to" value="{{ old('time_to', @$booking->time_to) }}" disabled/>
           @error('time_to')
             <div class="alert alert-danger">
                 {{ $message }}
             </div>
         @enderror
       </div>
-      @if (is_null(@$booking->bukti))
+      <div class="form-group mb-2">
+        <label for="time_from">Jam Booking</label>
+        <input type="text" class="form-control" id="nama" name="user_id" value="{{ $booking->jam }}" disabled/>
+    </div>
+    <div class="form-group mb-2">
+      <label for="time_from">Total Bayar</label>
+      <input type="text" class="form-control" id="nama" name="user_id" value="{{ $booking->total_harga }}" disabled/>
+  </div>
+      {{-- @if (is_null(@$booking->bukti))
+      
+      @else --}}
       <div class="mb-3 row mt-3">
-       
+        <label for="foto_barang" class="col-sm-2 col-form-label">Bukti</label>
         <div class="col-sm-5">
           @if(!empty(@$booking->bukti))
-          <label for="foto_barang" class="col-sm-2 col-form-label">Bukti</label>
           <img src="{{ $booking->bukti }}" class="mb-3" alt="foto" width="100px" />
-          <input type="file" class="form-control" name="bukti" id="bukti" placeholder="bukti">
           @endif
-            
+              {{-- <input type="file" class="form-control" name="bukti" id="bukti" placeholder="bukti"> --}}
           </div>
       </div>
       @error('bukti')
       <div class="alert alert-danger">
           {{ $message }}
       </div>
-      @else
-      
       @enderror
-      @endif
-      
+      {{-- @endif --}}
+      <label for="type">Status</label>
+              <select id="status" name="status" class="form-select">
+                <option value="Masuk Jadwal">Masuk Jadwal</option>
+                <option value="Reject">Reject</option>
+                <option value="Selesai">Selesai</option>
+              </select>
+              @error('status')
+      <div class="alert alert-danger">
+          {{ $message }}
+      </div>
+      @enderror
+            </div>
      
 
               <div class="row justify-content-end">

@@ -42,8 +42,7 @@ class BookingController extends Controller
         //     $request->bukti->storeAs('bukti', $fileName);
         //     $input['bukti'] = $fileName;
         // }
-        $jam = Carbon::parse($request->time_from)->diffInHours(Carbon::parse($request->time_to));
-
+        $jam = Carbon::parse($request->time_from . ':00:00')->diffInHours(Carbon::parse($request->time_to . ':00:00'));
 
         $data = Booking::create(
             [
@@ -53,7 +52,7 @@ class BookingController extends Controller
                 'status' => 'Belum Bayar DP',
                 'bukti' => null,
                 'user_id' => Auth::id(),
-                'jam' =>  $jam,
+                'jam' => $jam,
                 'total_harga' => $jam * $request['harga'],
             ]
 
@@ -62,8 +61,9 @@ class BookingController extends Controller
     }
     public function show($id)
     {
-        $data = Booking::findOrfail($id);
-        return view('booking.show', compact('data'));
+        $booking = Booking::findOrfail($id);
+        $lapangan = Lapangan::all();
+        return view('booking.show', compact('booking', 'lapangan'));
     }
     public function edit(Booking $booking)
     {
@@ -79,16 +79,22 @@ class BookingController extends Controller
                 'bukti' => 'mimes:jpg,png|max:1024',
             ];
         $this->validate($request, $rules);
-        $input = $request->all();
-        $input = $request->except('user_id');
+        // $input = $request->all();
+        // $input = $request->except('user_id');
         if ($request->hasFile('bukti')) {
             $fileName = $request->bukti->getClientOriginalName();
             $request->bukti->storeAs('img', $fileName);
             // Storage::disk('public')->put($fileName, $request->file('bukti'));
-            $input['bukti'] = $fileName;
+            $input = $fileName;
         }
-
-        $booking->update($input);
+        $jam = Carbon::parse($request->time_from . ':00:00')->diffInHours(Carbon::parse($request->time_to . ':00:00'));
+        $booking->update([
+            'time_from' => $request['time_from'],
+            'time_to' => $request['time_to'],
+            'jam' => $jam,
+            'bukti' => $input,
+            'total_harga' => $jam * $request['harga'],
+        ]);
         return redirect('/booking/index');
     }
     public function destroy($id)

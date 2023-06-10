@@ -15,6 +15,7 @@
           </div>
           <!-- /.card-header -->
           <div class="card-body">
+            <a class="btn btn-primary mb-3" href="/booking/create" role="button">Booking Baru</a>
             <table id="example1" class="table table-bordered table-striped">
               <thead>
                 <tr>
@@ -24,6 +25,8 @@
                   <th>Bukti</th>
                   <th>Mulai</th>
                   <th>Selesai</th>
+                  <th>Jam</th>
+                  <th>Harga</th>
                   <th>Status</th>
                   <th>Action</th>
 
@@ -45,7 +48,9 @@
                   @endif
                 
                   <td>{{ $item->time_from }}</td>  
-                  <td>{{ $item->time_to }}</td>    
+                  <td>{{ $item->time_to }}</td> 
+                  <td>{{ $item->jam }}</td>    
+                  <td>{{ $item->total_harga }}</td>    
                   <td>{{ $item->status }}</td>    
 
 
@@ -61,7 +66,7 @@
                       <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
                         <a class="dropdown-item" href="/booking/{{ $item->id }}/edit"
                           ><i class="bx bx-edit-alt me-2"></i> Edit</a>
-                          <a class="dropdown-item" href="/booking/{{ $item->id }}/edit"
+                          <a class="dropdown-item" href="/booking/{{ $item->id }}/show"
                             ><i class="bx bx-edit-alt me-2"></i> Detail</a>
                       </div>
                     </div>
@@ -93,8 +98,11 @@
                   <th>Bukti</th>
                   <th>Mulai</th>
                   <th>Selesai</th>
+                  <th>Jam</th>
+                  <th>Harga</th>
                   <th>Status</th>
                   <th>Action</th>
+
                 </tr>
                 </tfoot>
             </table>

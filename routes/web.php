@@ -5,6 +5,8 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\LapanganController;
 use App\Http\Controllers\BookingController;
+use App\Http\Controllers\BookingAdminController;
+
 
 
 
@@ -48,4 +50,9 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
     Route::patch('/lapangan/{lapangan}', [LapanganController::class, 'update'])->name(name: 'lapangan.update');
     Route::delete('/lapangan/{lapangan}', [LapanganController::class, 'destroy'])->name(name: 'lapangan.delete');
     Route::get('/lapangan/{lapangan}/show', [LapanganController::class, 'show'])->name('lapangan.show');
+    Route::get('/bookingadmin/index', [BookingAdminController::class, 'index'])->name('bookingadmin.index');
+    Route::get('/bookingadmin/{booking}/edit', [BookingAdminController::class, 'edit'])->name(name: 'bookingadmin.edit');
+    Route::patch('/bookingadmin/{booking}', [BookingAdminController::class, 'update'])->name(name: 'bookingadmin.update');
+    Route::delete('/bookingadmin/{booking}', [BookingAdminController::class, 'destroy'])->name(name: 'bookingadmin.delete');
+    Route::get('/bookingadmin/{booking}/show', [BookingAdminController::class, 'show'])->name('bookingadmin.show');
 });

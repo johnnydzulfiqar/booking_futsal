@@ -13,33 +13,48 @@
           <div class="card-header">
             <h3 class="card-title">DataTable with default features</h3>
           </div>
-          <div class="demo-inline-spacing " >
-            {{-- <a type="button" class="btn btn-outline-primary" href="{{ url('lapangan/create') }}">
-              <span class="tf-icons bx bx-pie-chart-alt"></span>&nbsp; Tambah Lapangan
-            </a>     --}}
-          </div>
           <!-- /.card-header -->
           <div class="card-body">
             <table id="example1" class="table table-bordered table-striped">
               <thead>
                 <tr>
                   <th>No</th>
-                  <th>Nama</th>
+                  <th>Booking Atas Nama</th>
+                  <th>Lapangan</th>
+                  <th>Bukti</th>
+                  <th>Mulai</th>
+                  <th>Selesai</th>
+                  <th>Jam</th>
                   <th>Harga</th>
                   <th>Status</th>
                   <th>Action</th>
+
                 </tr>
                 </thead>
                 <tbody>
-                  @foreach ($lapangan as $item)
+                  @foreach ($booking as $item)
+                 
                   <tr>
                                 
                   <td>{{ $loop->iteration }}</td>
-                  <td>{{ $item->nama }}</td>
-                  <td>{{ $item->harga }}</td>
-                  <td>{{ $item->status }}</td>  
+                  <td>{{ $item->user->name }}</td>
+                  <td>{{ $item->lapangan->nama }}</td>
+                  @if (is_null($item->bukti))
+                  <td>Belum Bayar DP</td>
+                  @else
+                  <td><img src="{{$item->bukti}}" alt="foto" width="100px"></td>
+                  @endif
+                
+                  <td>{{ $item->time_from }}</td>  
+                  <td>{{ $item->time_to }}</td> 
+                  <td>{{ $item->jam }}</td>    
+                  <td>{{ $item->total_harga }}</td>    
+                  <td>{{ $item->status }}</td>    
+
+
                   <td>
-                    <form action="/lapangan/{{  $item->id }}" method="POST">
+
+                    <form action="/bookingadmin/{{  $item->id }}" method="POST">
                       @csrf
                       @method('delete')
                     <div class="dropdown">
@@ -47,23 +62,32 @@
                         Action
                       </button>
                       <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                        <a class="dropdown-item" href="/lapangan/{{ $item->id }}/edit"
+                        <a class="dropdown-item" href="/bookingadmin/{{ $item->id }}/edit"
                           ><i class="bx bx-edit-alt me-2"></i> Edit</a>
-                          <input type="submit" class="btn btn-danger btn-sm" value="delete">
+                         
+                            <input type="submit" class="btn btn-danger btn-sm" value="delete">
                       </div>
                     </div>
                   </form>
+                
                   </td>        
-                  </tr>            
+                  </tr>  
+                        
                   @endforeach
                 </tbody>
                 <tfoot>
                 <tr>
                   <th>No</th>
-                  <th>Nama</th>
+                  <th>Booking Atas Nama </th>
+                  <th>Lapangan</th>
+                  <th>Bukti</th>
+                  <th>Mulai</th>
+                  <th>Selesai</th>
+                  <th>Jam</th>
                   <th>Harga</th>
                   <th>Status</th>
                   <th>Action</th>
+
                 </tr>
                 </tfoot>
             </table>

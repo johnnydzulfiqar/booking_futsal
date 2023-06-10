@@ -14,6 +14,8 @@ class Booking extends Model
         'lapangan_id',
         'time_from',
         'time_to',
+        'jam',
+        'total_harga',
         'user_id',
         'status',
         'bukti',

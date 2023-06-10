@@ -25,11 +25,11 @@ class CreateUsersSeeder extends Seeder
 
             ],
             [
-                'name' => 'User',
+                'name' => 'Ibu Ajang',
                 'email' => 'user@gmail.com',
                 'type' => 0,
                 'password' => bcrypt('12345'),
-                'alamat' => 'Alamat User',
+                'alamat' => 'Kalimantan',
 
             ],
         ];
