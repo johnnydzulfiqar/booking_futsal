@@ -9,8 +9,8 @@ Index User
     <!-- Basic Layout & Basic with Icons -->
     {{-- <div class="row"> --}}
         <!-- Basic with Icons -->
-        <form action="{{ !empty($admin) ? route('admin.update', $admin): url('admin/create')}}" method="POST" enctype="multipart/form-data">
-            @if(!empty($admin))
+        <form action="{{ !empty($user) ? route('user.update', $user): url('user/create')}}" method="POST" enctype="multipart/form-data">
+            @if(!empty($user))
             @method('PATCH')
             @endif
             @csrf
@@ -34,7 +34,7 @@ Index User
                       name="name"
                       class="form-control"
                       id="name"
-                      value="{{ old('name', @$admin->name) }}"
+                      value="{{ old('name', @$user->name) }}"
                       aria-describedby="basic-icon-default-fullname2"
                     />
                   </div>
@@ -50,7 +50,7 @@ Index User
                       type="text"
                       id="email"
                       name="email"
-                      value="{{ old('email', @$admin->email) }}"
+                      value="{{ old('email', @$user->email) }}"
                       class="form-control"
                      
                       aria-describedby="basic-icon-default-email2"
@@ -73,7 +73,7 @@ Index User
                       name="alamat"
                       class="form-control"
                       id="alamat"
-                      value="{{ old('alamat', @$admin->alamat) }}"
+                      value="{{ old('alamat', @$user->alamat) }}"
                       aria-describedby="basic-icon-default-fullname2"
                     />
                   </div>
@@ -90,7 +90,7 @@ Index User
                       type="password"
                       id="password"
                       name="password"
-                      value="{{ old('password', @$admin->password) }}"
+                      value="{{ old('password', @$user->password) }}"
                       class="form-control fullname2-mask"
                      
                       aria-describedby="basic-icon-default-fullname2"
@@ -98,14 +98,7 @@ Index User
                   </div>
                 </div>
               </div>
-              @if ( auth()->user()->type == 'admin') 
-              <label for="type">Role</label>
-              <select id="type" name="type" class="form-select">
-                <option value="0">User</option>
-                <option value="1">Admin</option>
-
-              </select>
-              @endif
+             
               {{-- <div class="mb-3 row mt-3">
                 <label for="foto_produk" class="col-sm-2 col-form-label">Foto</label>
                 <div class="col-sm-5">

@@ -49,7 +49,7 @@
                       <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
                         <a class="dropdown-item" href="/lapangan/{{ $item->id }}/edit"
                           ><i class="bx bx-edit-alt me-2"></i> Edit</a>
-                          <input type="submit" class="btn btn-danger btn-sm" value="delete">
+                          {{-- <input type="submit" class="btn btn-danger btn-sm" value="delete"> --}}
                       </div>
                     </div>
                   </form>

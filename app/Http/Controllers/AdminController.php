@@ -23,6 +23,7 @@ class AdminController extends Controller
     {
         return view('admin.create', compact(var_name: 'admin'));
     }
+
     public function update(User $admin, Request $request)
     {
         $rules =
@@ -30,21 +31,15 @@ class AdminController extends Controller
                 'name' => 'required',
                 'email' => 'required',
                 'password' => 'required',
-                // 'foto_produk' => 'required|mimes:jpg,png|max:1024',
                 'type' => 'required',
             ];
         $this->validate($request, $rules);
         $input = $request->all();
 
-        // if ($request->hasFile('foto_produk')) {
-        //     $fileName = $request->foto_produk->getClientOriginalName();
-
-        //     $request->foto_produk->storeAs('admin', $fileName);
-        //     $input['foto_produk'] = $fileName;
-        // }
         $admin->update($input);
         return redirect(to: '/admin/index')->with('success', 'Data Berhasil Diupdate');
     }
+
     public function destroy($id)
     {
         $admin = User::find($id);
@@ -53,5 +48,27 @@ class AdminController extends Controller
         // }
         $admin->delete();
         return redirect('/admin/index')->with('success', 'Data Berhasil Dihapus');
+    }
+
+
+    ///buat user saja
+    public function edit2(User $user)
+    {
+        return view('user.create', compact(var_name: 'user'));
+    }
+    public function update2(User $user, Request $request)
+    {
+        $rules =
+            [
+                'name' => 'required',
+                'email' => 'required',
+                'password' => 'required',
+
+            ];
+        $this->validate($request, $rules);
+        $input = $request->all();
+        $input = $request->except('type');
+        $user->update($input);
+        return redirect(to: '/booking/index')->with('success', 'Data Berhasil Diupdate');
     }
 }

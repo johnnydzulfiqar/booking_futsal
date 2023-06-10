@@ -25,9 +25,8 @@ use App\Http\Controllers\BookingAdminController;
 
 Auth::routes();
 Route::get('/', [HomeController::class, 'index'])->name('home');
-
+Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::middleware(['auth', 'user-access:user'])->group(function () {
-    Route::get('/home', [HomeController::class, 'index'])->name('home');
     Route::get('/booking/index', [BookingController::class, 'index'])->name('booking.index');
     Route::get('/booking/create', [BookingController::class, 'create'])->name('booking.create');
     Route::post('/booking/create', [BookingController::class, 'store']);
@@ -35,6 +34,8 @@ Route::middleware(['auth', 'user-access:user'])->group(function () {
     Route::patch('/booking/{booking}', [BookingController::class, 'update'])->name(name: 'booking.update');
     Route::delete('/booking/{booking}', [BookingController::class, 'destroy'])->name(name: 'booking.delete');
     Route::get('/booking/{booking}/show', [BookingController::class, 'show'])->name('booking.show');
+    Route::get('/user/{user}/edit', [AdminController::class, 'edit2'])->name(name: 'user.edit');
+    Route::patch('/user/{user}', [AdminController::class, 'update2'])->name(name: 'user.update');
 });
 
 Route::middleware(['auth', 'user-access:admin'])->group(function () {
