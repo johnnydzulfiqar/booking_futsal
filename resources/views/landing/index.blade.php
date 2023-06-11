@@ -186,7 +186,7 @@
                         <div class="gmap_canvas">
                         <iframe width="100%" height="100%" id="gmap_canvas" src="https://maps.google.com/maps?q=queen futsal&t=&z=15&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="yes" marginheight="0" marginwidth="0"></iframe><a href="https://2yu.co">
                             <style>.mapouter{position:relative;text-align:right;height:100%;width:100%;}</style>
-                            <a href="https://embedgooglemap.2yu.co/">html embed google map</a><style>.gmap_canvas {overflow:hidden;background:none!important;height:100%;width:100%;}
+                            <style>.gmap_canvas {overflow:hidden;background:none!important;height:100%;width:100%;}
                             </style>
                         </div>
                     </div>
