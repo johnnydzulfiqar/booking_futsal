@@ -18,7 +18,7 @@ class CreateLapanganSeeder extends Seeder
         $lapangan = [
             [
                 'nama' => 'Lapangan Futsal',
-                'harga' => '100000',
+                'harga' => '125000',
                 'status' => 'Aktif',
 
             ],
