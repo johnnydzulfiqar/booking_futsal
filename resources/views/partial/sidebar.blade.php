@@ -74,6 +74,10 @@
                   <i class="far fa-circle nav-icon"></i>
                   <p>Index Booking</p>
                 </a>
+                <a href="/booking/jadwal" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Jadwal Booking</p>
+                </a>
               </li>
             
               
@@ -137,6 +141,10 @@
                 <a href="/bookingadmin/index" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Index Booking</p>
+                </a>
+                <a href="/bookingadmin/jadwal" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Jadwal Booking</p>
                 </a>
               </li>
             

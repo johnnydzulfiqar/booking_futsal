@@ -34,6 +34,7 @@ Route::middleware(['auth', 'user-access:user'])->group(function () {
     Route::patch('/booking/{booking}', [BookingController::class, 'update'])->name(name: 'booking.update');
     Route::delete('/booking/{booking}', [BookingController::class, 'destroy'])->name(name: 'booking.delete');
     Route::get('/booking/{booking}/show', [BookingController::class, 'show'])->name('booking.show');
+    Route::get('/booking/jadwal', [BookingController::class, 'jadwal'])->name('jadwal.index');
     Route::get('/user/{user}/edit', [AdminController::class, 'edit2'])->name(name: 'user.edit');
     Route::patch('/user/{user}', [AdminController::class, 'update2'])->name(name: 'user.update');
 });
@@ -56,4 +57,5 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
     Route::patch('/bookingadmin/{booking}', [BookingAdminController::class, 'update'])->name(name: 'bookingadmin.update');
     Route::delete('/bookingadmin/{booking}', [BookingAdminController::class, 'destroy'])->name(name: 'bookingadmin.delete');
     Route::get('/bookingadmin/{booking}/show', [BookingAdminController::class, 'show'])->name('bookingadmin.show');
+    Route::get('/bookingadmin/jadwal', [BookingAdminController::class, 'jadwal'])->name('jadwal.index');
 });

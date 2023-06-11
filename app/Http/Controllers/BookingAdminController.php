@@ -22,6 +22,11 @@ class BookingAdminController extends Controller
         $booking = Booking::all();
         return view('bookingadmin.index', compact('booking'));
     }
+    public function jadwal(Request $request)
+    {
+        $booking = Booking::all();
+        return view('jadwal.index', compact('booking'));
+    }
     public function show($id)
     {
         $data = Booking::findOrfail($id);
