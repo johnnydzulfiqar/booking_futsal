@@ -103,11 +103,12 @@ Index User
                       locale: 'en',
                       sideBySide: true,
                       icons: {
-                      up: 'fas fa-chevron-up',
-                      down: 'fas fa-chevron-down',
-                      previous: 'fas fa-chevron-left',
-                      next: 'fas fa-chevron-right'
+                        up: 'fas fa-chevron-up',
+                        down: 'fas fa-chevron-down',
+                        previous: 'fas fa-chevron-left',
+                        next: 'fas fa-chevron-right',
                       },
+                      minDate: new Date,
                       stepping: 10
                   });
               </script>

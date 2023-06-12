@@ -75,7 +75,7 @@ Index User
         <label for="foto_barang" class="col-sm-2 col-form-label">Bukti</label>
         <div class="col-sm-5">
           @if(!empty(@$booking->bukti))
-          <img src="{{ $booking->bukti }}" class="mb-3" alt="foto" width="100px" />
+          <img src="{{ asset('storage/img/' . $booking->bukti) }}" class="mb-3" alt="foto" width="100px" />
           @endif
               {{-- <input type="file" class="form-control" name="bukti" id="bukti" placeholder="bukti"> --}}
           </div>
