@@ -15,6 +15,21 @@
           </div>
           <!-- /.card-header -->
           <div class="card-body">
+            <form method="GET" action="/admin/filter">
+              <div class="row pb-3">
+            <div class="col-md-3">
+              <label>Start date</label>
+              <input type="date" name="start_date" class="form-control">
+            </div>
+            <div class="col-md-3">
+              <label>End date</label>
+              <input type="date" name="end_date" class="form-control">
+            </div>
+            <div class="col-md-1 pt-4" style="margin: 5px 0px 0px 0px">
+              <button type="submit" class="btn btn-primary">Filter</button>
+            </div>
+          </div>
+          </form>
             <table id="example1" class="table table-bordered table-striped">
               <thead>
                 <tr>

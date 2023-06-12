@@ -24,6 +24,19 @@ class BookingController extends Controller
         $booking = Booking::all();
         return view('booking.index', compact('booking'));
     }
+    public function filter(Request $request)
+    {
+        $start_date = $request->start_date;
+        $end_date = $request->end_date;
+        if (empty($start_date && $end_date)) {
+            $booking = Booking::all();
+            return view('booking.index', compact('booking'));
+        } else {
+            $booking = Booking::whereBetween('time_from', [$start_date, $end_date])
+                ->get();
+            return view('booking.index', compact('booking'));
+        }
+    }
     public function jadwal(Request $request)
     {
         $booking = Booking::where('status', 'Masuk Jadwal')
@@ -86,7 +99,7 @@ class BookingController extends Controller
         // }
         $time_from = Carbon::parse($request->time_from . ':00:00');
         $time_to = Carbon::parse($request->time_to . ':00:00');
-        $jam = $time_from->diffInHours($time_to,false);
+        $jam = $time_from->diffInHours($time_to, false);
         $is_same_day = $time_from->diffInDays($time_to) === 0;
         if ($jam < 1) {
             throw ValidationException::withMessages([
@@ -94,7 +107,7 @@ class BookingController extends Controller
                 'time_to' => 'Jam Selesai lebih kecil dari jam mulai',
             ]);
         }
-        if (! $is_same_day) {
+        if (!$is_same_day) {
             throw ValidationException::withMessages([
                 'time_to' => 'Jam Selesai harus di hari yang sama',
             ]);

@@ -16,6 +16,21 @@
           <!-- /.card-header -->
           <div class="card-body">
             <a class="btn btn-primary mb-3" href="/booking/create" role="button">Booking Baru</a>
+            <form method="GET" action="/booking/filter">
+              <div class="row pb-3">
+            <div class="col-md-3">
+              <label>Start date</label>
+              <input type="date" name="start_date" class="form-control">
+            </div>
+            <div class="col-md-3">
+              <label>End date</label>
+              <input type="date" name="end_date" class="form-control">
+            </div>
+            <div class="col-md-1 pt-4" style="margin: 5px 0px 0px 0px">
+              <button type="submit" class="btn btn-primary">Filter</button>
+            </div>
+          </div>
+          </form>
             <table id="example1" class="table table-bordered table-striped">
               <thead>
                 <tr>
@@ -42,7 +57,7 @@
                   <td>{{ $item->user->name }}</td>
                   <td>{{ $item->lapangan->nama }}</td>
                   @if (is_null($item->bukti))
-                  <td><a href="bayar dp">Bayar DP</a></td>
+                  <td><a href="/booking/{{ $item->id }}/show">Bayar DP</a></td>
                   @else
                   <td><img src="{{asset('storage/img/' . $item->bukti)}}" alt="foto" width="100px"></td>
                   @endif

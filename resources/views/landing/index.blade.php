@@ -27,7 +27,7 @@
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#projects">Jadwal</a></li>
                         <li class="nav-item"><a class="nav-link" href="#signup">Contact</a></li>
                     </ul>
                 </div>
@@ -60,48 +60,48 @@
             </div>
         </section>
         <!-- Projects-->
-        {{-- <section class="projects-section bg-light" id="projects">
-            <div class="container px-4 px-lg-5">
-                <!-- Featured Project Row-->
-                <div class="row gx-0 mb-4 mb-lg-5 align-items-center">
-                    <div class="col-xl-8 col-lg-7"><img class="img-fluid mb-3 mb-lg-0" src="assets/img/bg-masthead.jpg" alt="..." /></div>
-                    <div class="col-xl-4 col-lg-5">
-                        <div class="featured-text text-center text-lg-left">
-                            <h4>Shoreline</h4>
-                            <p class="text-black-50 mb-0">Grayscale is open source and MIT licensed. This means you can use it for any project - even commercial projects! Download it, customize it, and publish your website!</p>
-                        </div>
-                    </div>
-                </div>
-                <!-- Project One Row-->
-                <div class="row gx-0 mb-5 mb-lg-0 justify-content-center">
-                    <div class="col-lg-6"><img class="img-fluid" src="assets/img/demo-image-01.jpg" alt="..." /></div>
-                    <div class="col-lg-6">
-                        <div class="bg-black text-center h-100 project">
-                            <div class="d-flex h-100">
-                                <div class="project-text w-100 my-auto text-center text-lg-left">
-                                    <h4 class="text-white">Misty</h4>
-                                    <p class="mb-0 text-white-50">An example of where you can put an image of a project, or anything else, along with a description.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Project Two Row-->
-                <div class="row gx-0 justify-content-center">
-                    <div class="col-lg-6"><img class="img-fluid" src="assets/img/demo-image-02.jpg" alt="..." /></div>
-                    <div class="col-lg-6 order-lg-first">
-                        <div class="bg-black text-center h-100 project">
-                            <div class="d-flex h-100">
-                                <div class="project-text w-100 my-auto text-center text-lg-right">
-                                    <h4 class="text-white">Mountains</h4>
-                                    <p class="mb-0 text-white-50">Another example of a project with its respective description. These sections work well responsively as well!</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section> --}}
+        <section class="projects-section bg-light" id="projects">
+            <center><h2>Jadwal Queen Futsal</h2></center>
+            @php
+        $resources = [];
+        $events = [];
+        foreach ($lapangan as $lapang) {
+            array_push($resources, [
+                'id' => 'lapangan-' . $lapang->id,
+                'title' => $lapang->nama,
+            ]);
+        }
+        foreach ($booking as $book) {
+            array_push($events, [
+                'id' => $book->id,
+                'resourceId' => 'lapangan-' . $book->lapangan_id,
+                'title' => $book->user->name . " ($book->jam jam)",
+                'start' => $book->time_from,
+                'end' => $book->time_to,
+            ]);
+        }
+    @endphp
+    <div id='calendar'></div>
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js'></script>
+    <script>
+
+      document.addEventListener('DOMContentLoaded', function() {
+        var calendarEl = document.getElementById('calendar');
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+          initialView: 'dayGridMonth',
+          headerToolbar: {
+                left: 'prev,next',
+                center: 'title',
+                right: 'dayGridMonth,timeGridWeek'
+            },
+            resources: @js($resources),
+            events: @js($events),
+        });
+        calendar.render();
+      });
+
+    </script>
+        </section>
         <!-- Signup-->
         <section class="signup-section" id="signup">
             <div class="container px-4 px-lg-5">

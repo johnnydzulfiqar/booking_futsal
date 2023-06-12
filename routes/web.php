@@ -24,7 +24,7 @@ use App\Http\Controllers\BookingAdminController;
 */
 
 Auth::routes();
-Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/', [HomeController::class, 'jadwal'])->name('home');
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::middleware(['auth', 'user-access:user'])->group(function () {
     Route::get('/booking/index', [BookingController::class, 'index'])->name('booking.index');
@@ -37,6 +37,7 @@ Route::middleware(['auth', 'user-access:user'])->group(function () {
     Route::get('/booking/jadwal', [BookingController::class, 'jadwal'])->name('jadwal.index');
     Route::get('/user/{user}/edit', [AdminController::class, 'edit2'])->name(name: 'user.edit');
     Route::patch('/user/{user}', [AdminController::class, 'update2'])->name(name: 'user.update');
+    Route::get('/booking/filter', [BookingController::class, 'filter']);
 });
 
 Route::middleware(['auth', 'user-access:admin'])->group(function () {
@@ -58,4 +59,5 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
     Route::delete('/bookingadmin/{booking}', [BookingAdminController::class, 'destroy'])->name(name: 'bookingadmin.delete');
     Route::get('/bookingadmin/{booking}/show', [BookingAdminController::class, 'show'])->name('bookingadmin.show');
     Route::get('/bookingadmin/jadwal', [BookingAdminController::class, 'jadwal'])->name('jadwal.index');
+    Route::get('/admin/filter', [BookingAdminController::class, 'filter']);
 });
