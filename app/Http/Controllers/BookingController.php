@@ -26,7 +26,9 @@ class BookingController extends Controller
     }
     public function jadwal(Request $request)
     {
-        $booking = Booking::all();
+        $booking = Booking::where('status', 'Masuk Jadwal')
+            ->orWhere('status', 'Selesai')
+            ->get();
         $lapangan = Lapangan::all();
         return view('jadwal.index', compact('booking', 'lapangan'));
     }
