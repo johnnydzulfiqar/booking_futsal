@@ -15,7 +15,13 @@
           </div>
           <!-- /.card-header -->
           <div class="card-body">
+           
+            @if ($data->lapangan->status == 'Tidak Aktif')
+                <h3 style="color: red">Lapangan Tutup</h3>
+            @else
             <a class="btn btn-primary mb-3" href="/booking/create" role="button">Booking Baru</a>
+            @endif
+
             <form method="GET" action="/booking/filter">
               <div class="row pb-3">
             <div class="col-md-3">

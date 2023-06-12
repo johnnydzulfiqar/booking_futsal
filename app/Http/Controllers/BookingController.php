@@ -22,7 +22,8 @@ class BookingController extends Controller
     public function index(Request $request)
     {
         $booking = Booking::all();
-        return view('booking.index', compact('booking'));
+        $data = Booking::all()->first();
+        return view('booking.index', compact('booking', 'data'));
     }
     public function filter(Request $request)
     {
