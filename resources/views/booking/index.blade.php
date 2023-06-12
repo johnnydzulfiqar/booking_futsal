@@ -44,7 +44,7 @@
                   @if (is_null($item->bukti))
                   <td><a href="bayar dp">Bayar DP</a></td>
                   @else
-                  <td><img src="{{$item->bukti}}" alt="foto" width="100px"></td>
+                  <td><img src="{{asset('storage/img/' . $item->bukti)}}" alt="foto" width="100px"></td>
                   @endif
                 
                   <td>{{ $item->time_from }}</td>  

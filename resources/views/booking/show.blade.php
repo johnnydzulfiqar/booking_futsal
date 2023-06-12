@@ -9,7 +9,7 @@ Index User
     <!-- Basic Layout & Basic with Icons -->
     {{-- <div class="row"> --}}
         <!-- Basic with Icons -->
-        <form action="{{ !empty($booking) ? route('bookingadmin.update', $booking): url('bookingadmin/create')}}" method="POST" enctype="multipart/form-data">
+        <form action="{{ !empty($booking) ? route('booking.update', $booking): url('bookingadmin/create')}}" method="POST" enctype="multipart/form-data">
             @if(!empty($booking))
             @method('PATCH')
             @endif
@@ -75,7 +75,7 @@ Index User
         <label for="foto_barang" class="col-sm-2 col-form-label">Bayar DP sebesar 50% : {{ $booking->total_harga/2 }} </label>
         <div class="col-sm-5">
           @if(!empty(@$booking->bukti))
-          <img src="{{ $booking->bukti }}" class="mb-3" alt="foto" width="100px" />
+          <img src="{{ asset('storage/img/' . $booking->bukti) }}" class="mb-3" alt="foto" width="100px" />
           @endif
               <input type="file" class="form-control" name="bukti" id="bukti" placeholder="bukti">
           </div>
