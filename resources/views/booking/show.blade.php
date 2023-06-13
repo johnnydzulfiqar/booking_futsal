@@ -66,18 +66,20 @@ Index User
     </div>
     <div class="form-group mb-2">
       <label for="time_from">Total Bayar</label>
-      <input type="text" class="form-control" id="nama" name="user_id" value="{{ $booking->total_harga }}" disabled/>
+      <input type="text" class="form-control" id="nama" name="user_id" value="@currency ( $booking->total_harga)" disabled/>
   </div>
       {{-- @if (is_null(@$booking->bukti))
       
       @else --}}
       <div class="mb-3 row mt-3">
-        <label for="foto_barang" class="col-sm-2 col-form-label">Bayar DP sebesar 50% : {{ $booking->total_harga/2 }} </label>
+        <label for="foto_barang" class="col-sm-2 col-form-label">Bayar DP sebesar 50% : @currency ( $booking->total_harga/2) </label>
         <div class="col-sm-5">
           @if(!empty(@$booking->bukti))
-          <img src="{{ asset('storage/img/' . $booking->bukti) }}" class="mb-3" alt="foto" width="100px" />
+          <img src="{{ asset('storage/img/' . $booking->bukti) }}" class="mb-3" alt="foto" width="240px" />
+          @else
+          <input type="file" class="form-control" name="bukti" id="bukti" placeholder="bukti">
           @endif
-              <input type="file" class="form-control" name="bukti" id="bukti" placeholder="bukti">
+             
           </div>
       </div>
       @error('bukti')
@@ -92,7 +94,11 @@ Index User
 
               <div class="row justify-content-end">
                 <div class="col-sm-10">
+                  @if(!empty(@$booking->bukti))
+                 
+                  @else
                   <button type="submit" class="btn btn-primary">Send</button>
+                  @endif
                 </div>
               </div>
             </form>

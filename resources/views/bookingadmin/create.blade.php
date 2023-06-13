@@ -66,7 +66,7 @@ Index User
     </div>
     <div class="form-group mb-2">
       <label for="time_from">Total Bayar</label>
-      <input type="text" class="form-control" id="nama" name="user_id" value="{{ $booking->total_harga }}" disabled/>
+      <input type="text" class="form-control" id="nama" name="user_id" value="@currency (  $booking->total_harga )" disabled/>
   </div>
       {{-- @if (is_null(@$booking->bukti))
       
@@ -74,8 +74,10 @@ Index User
       <div class="mb-3 row mt-3">
         <label for="foto_barang" class="col-sm-2 col-form-label">Bukti</label>
         <div class="col-sm-5">
+          <label>Bayar DP sebesar 50% : @currency ( $booking->total_harga/2)</label>
           @if(!empty(@$booking->bukti))
-          <img src="{{ asset('storage/img/' . $booking->bukti) }}" class="mb-3" alt="foto" width="100px" />
+          
+          <img src="{{ asset('storage/img/' . $booking->bukti) }}" class="mb-3" alt="foto" width="240px" />
           @endif
               {{-- <input type="file" class="form-control" name="bukti" id="bukti" placeholder="bukti"> --}}
           </div>
@@ -86,23 +88,28 @@ Index User
       </div>
       @enderror
       {{-- @endif --}}
+      @if(!empty(@$booking->bukti))
       <label for="type">Status</label>
-              <select id="status" name="status" class="form-select">
-                <option value="Masuk Jadwal">Masuk Jadwal</option>
-                <option value="Reject">Reject</option>
-                <option value="Selesai">Selesai</option>
-              </select>
-              @error('status')
-      <div class="alert alert-danger">
-          {{ $message }}
-      </div>
-      @enderror
-            </div>
-     
+      <select id="status" name="status" class="form-select">
+        <option value="Masuk Jadwal">Masuk Jadwal</option>
+        <option value="Reject">Reject</option>
+        <option value="Selesai">Selesai</option>
+      </select>
+      @error('status')
+<div class="alert alert-danger">
+  {{ $message }}
+</div>
+@enderror
+    </div>
 
-              <div class="row justify-content-end">
-                <div class="col-sm-10">
-                  <button type="submit" class="btn btn-primary">Send</button>
+
+      <div class="row justify-content-end">
+        <div class="col-sm-10">
+          <button type="submit" class="btn btn-primary">Send</button>      
+      @else
+
+      @endif
+      
                 </div>
               </div>
             </form>

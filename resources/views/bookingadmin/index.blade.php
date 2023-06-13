@@ -55,15 +55,16 @@
                   <td>{{ $item->user->name }}</td>
                   <td>{{ $item->lapangan->nama }}</td>
                   @if (is_null($item->bukti))
-                  <td>Belum Bayar DP</td>
+                  <td style="color :red">Belum Bayar DP</td>
                   @else
-                  <td><img src="{{ asset('storage/img/' . $item->bukti) }}" alt="foto" width="100px"></td>
+                  {{-- <td><img src="{{asset('storage/img/' . $item->bukti)}}" alt="foto" width="100px"></td> --}}
+                  <td style="color: green">Sudah Bayar DP</td>
                   @endif
                 
                   <td>{{ $item->time_from }}</td>  
                   <td>{{ $item->time_to }}</td> 
                   <td>{{ $item->jam }}</td>    
-                  <td>{{ $item->total_harga }}</td>    
+                  <td>@currency ( $item->total_harga )</td>    
                   <td>{{ $item->status }}</td>    
 
 

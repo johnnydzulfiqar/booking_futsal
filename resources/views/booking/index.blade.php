@@ -63,15 +63,16 @@
                   <td>{{ $item->user->name }}</td>
                   <td>{{ $item->lapangan->nama }}</td>
                   @if (is_null($item->bukti))
-                  <td><a href="/booking/{{ $item->id }}/show">Bayar DP</a></td>
+                  <td><a href="/booking/{{ $item->id }}/show">Belum Bayar DP</a></td>
                   @else
-                  <td><img src="{{asset('storage/img/' . $item->bukti)}}" alt="foto" width="100px"></td>
+                  {{-- <td><img src="{{asset('storage/img/' . $item->bukti)}}" alt="foto" width="100px"></td> --}}
+                  <td>Sudah Bayar DP</td>
                   @endif
                 
                   <td>{{ $item->time_from }}</td>  
                   <td>{{ $item->time_to }}</td> 
                   <td>{{ $item->jam }}</td>    
-                  <td>{{ $item->total_harga }}</td>    
+                  <td>@currency ($item->total_harga)</td>    
                   <td>{{ $item->status }}</td>    
 
 
@@ -99,7 +100,7 @@
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
                      
-                        <a class="dropdown-item" href="/booking/{{ $item->id }}/edit"
+                        <a class="dropdown-item" href="/booking/{{ $item->id }}/show"
                           ><i class="bx bx-edit-alt me-2"></i> Detail</a>
                     </div>
                   </div>
