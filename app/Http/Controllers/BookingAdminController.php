@@ -20,7 +20,8 @@ class BookingAdminController extends Controller
     public function index(Request $request)
     {
         $booking = Booking::all();
-        return view('bookingadmin.index', compact('booking'));
+        $data = Booking::all()->first();
+        return view('bookingadmin.index', compact('booking', 'data'));
     }
     public function filter(Request $request)
     {
@@ -28,11 +29,13 @@ class BookingAdminController extends Controller
         $end_date = $request->end_date;
         if (empty($start_date && $end_date)) {
             $booking = Booking::all();
-            return view('bookingadmin.index', compact('booking'));
+            $data = Booking::all()->first();
+            return view('bookingadmin.index', compact('booking', 'data'));
         } else {
             $booking = Booking::whereBetween('time_from', [$start_date, $end_date])
                 ->get();
-            return view('bookingadmin.index', compact('booking'));
+            $data = Booking::all()->first();
+            return view('bookingadmin.index', compact('booking', 'data'));
         }
     }
     public function jadwal(Request $request)

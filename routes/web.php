@@ -25,7 +25,7 @@ use App\Http\Controllers\BookingAdminController;
 
 Auth::routes();
 Route::get('/', [HomeController::class, 'jadwal'])->name('home');
-Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::get('/home', [BookingController::class, 'index']);
 Route::middleware(['auth', 'user-access:user'])->group(function () {
     Route::get('/booking/index', [BookingController::class, 'index'])->name('booking.index');
     Route::get('/booking/create', [BookingController::class, 'create'])->name('booking.create');
