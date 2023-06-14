@@ -35,7 +35,7 @@
           headerToolbar: {
                 left: 'prev,next',
                 center: 'title',
-                right: 'dayGridMonth,timeGridWeek'
+                right: 'dayGridMonth,timeGridWeek,listWeek'
             },
             resources: @js($resources),
             events: @js($events),
