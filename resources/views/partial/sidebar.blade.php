@@ -51,7 +51,7 @@
                 <a href="/booking/index" class="nav-link active">
                   @endif
                   @if ( auth()->user()->type == 'admin') 
-                  <a href="/admin/index" class="nav-link active">
+                  <a href="/dashboard" class="nav-link active">
                     @endif
                   <i class="nav-icon fas fa-tachometer-alt"></i>
                   <p>Dashboard</p>

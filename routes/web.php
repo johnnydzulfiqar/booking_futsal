@@ -6,6 +6,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\LapanganController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\BookingAdminController;
+use App\Http\Controllers\DashboardController;
 
 
 
@@ -60,4 +61,5 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
     Route::get('/bookingadmin/{booking}/show', [BookingAdminController::class, 'show'])->name('bookingadmin.show');
     Route::get('/bookingadmin/jadwal', [BookingAdminController::class, 'jadwal'])->name('jadwal.index');
     Route::get('/admin/filter', [BookingAdminController::class, 'filter']);
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
 });
