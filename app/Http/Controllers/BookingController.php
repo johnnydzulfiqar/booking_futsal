@@ -180,17 +180,21 @@ class BookingController extends Controller
                 'bukti' => 'mimes:jpg,png|max:1024',
             ];
         $this->validate($request, $rules);
-        // $input = $request->all();
-        // $input = $request->except('user_id');
+        $input = $request->all();
+        $input = $request->except('user_id');
         if ($request->hasFile('bukti')) {
             $fileName = $request->bukti->getClientOriginalName();
             $request->bukti->storeAs('img', $fileName);
             // Storage::disk('public')->put($fileName, $request->file('bukti'));
-            $input = $fileName;
+            $input['bukti'] = $fileName;
         }
-        $booking->update([
-            'bukti' => $input,
-        ]);
+        $booking->update(
+            $input
+            // 'bukti' => $input,
+            // // 'time_from' => $request['time_from'],
+            // // 'time_to' => $request['time_to'],
+        );
+
         return redirect('/booking/index');
     }
     public function destroy($id)
