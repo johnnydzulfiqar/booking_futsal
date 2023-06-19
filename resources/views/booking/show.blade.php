@@ -77,7 +77,7 @@ Index User
           @if(!empty(@$booking->bukti))
           <img src="{{ asset('storage/img/' . $booking->bukti) }}" class="mb-3" alt="foto" width="240px" />
           @else
-          <input type="file" class="form-control" name="bukti" id="bukti" placeholder="bukti">
+          {{-- <input type="file" class="form-control" name="bukti" id="bukti" placeholder="bukti"> --}}
           @endif
              
           </div>
@@ -92,13 +92,13 @@ Index User
             </div>
      
 
-              <div class="row justify-content-end">
+              {{-- <div class="row justify-content-end">
                 <div class="col-sm-10">
                   @if(!empty(@$booking->bukti))
                  
                   @else
                   <button type="submit" class="btn btn-primary">Send</button>
-                  @endif
+                  @endif --}}
                 </div>
               </div>
             </form>

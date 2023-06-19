@@ -175,11 +175,77 @@ class BookingController extends Controller
     {
         $rules =
             [
-                // 'time_from' => 'required',
-                // 'time_to' => 'required',
-                'bukti' => 'mimes:jpg,png|max:1024',
+
+                'time_from' => [
+                    'required',
+                    function ($attribute, $value, $fail) {
+                        $now = Carbon::parse($value . ':00:00');
+                        if ($now->lt(Carbon::parse($now)->setHours(7))) {
+                            $fail('Jam Mulai tidak boleh kurang dari 07:00');
+                        }
+                        $today = Booking::query()
+                            ->where('time_from', 'like', $now->format('Y-m-d') . '%')
+                            ->get();
+                    }
+                ],
+                'time_to' => [
+                    'required',
+                    function ($attribute, $value, $fail) {
+                        $now = Carbon::parse($value . ':00:00');
+                        if ($now->gte(Carbon::parse($now)->setHours(1)) && $now->lt(Carbon::parse($now)->setHours(7))) {
+                            $fail('Jam Selesai tidak boleh lebih dari 24:00');
+                        }
+                        $today = Booking::query()
+                            ->where('time_from', 'like', $now->format('Y-m-d') . '%')
+                            ->get();
+                    }
+                ]
+                // 'bukti' => 'mimes:jpg,png|max:1024',
             ];
         $this->validate($request, $rules);
+        // if ($request->hasFile('bukti')) {
+        //     $fileName = $request->bukti->getClientOriginalName();
+        //     $request->bukti->storeAs('bukti', $fileName);
+        //     $input['bukti'] = $fileName;
+        // }
+        $time_from = Carbon::parse($request->time_from . ':00:00');
+        $time_to = Carbon::parse($request->time_to . ':00:00');
+        $jam = $time_from->diffInHours($time_to, false);
+        $is_same_day = $time_from->diffInDays($time_to) === 0;
+        if ($jam < 1) {
+            throw ValidationException::withMessages([
+                'time_from' => 'Jam Mulai lebih besar dari jam selesai',
+                'time_to' => 'Jam Selesai lebih kecil dari jam mulai',
+            ]);
+        }
+        if (!$is_same_day) {
+            throw ValidationException::withMessages([
+                'time_to' => 'Jam Selesai harus di hari yang sama',
+            ]);
+        }
+        $total = 0;
+        $lapangan = Lapangan::findOrFail($request['lapangan_id']);
+        $jam_start = (int) $time_from->format('G');
+        $jam_end = (int) $time_to->format('G');
+        $jam_end = $jam_end === 0 ? 24 : $jam_end;
+        if ($jam_end === 0) {
+            $time_to->subMinute();
+        }
+        $today = Booking::query()
+            ->where('time_from', 'like', $time_from->format('Y-m-d') . '%')
+            ->get();
+        for ($i = $jam_start; $i < $jam_end; $i++) {
+            $check = Carbon::parse($time_from)->setHours($i);
+
+            if ($i < 15) {
+                $total += $lapangan->harga;
+            } else if ($i >= 15 && $i < 18) {
+                $total += ($lapangan->harga + 50000);
+            } else {
+                $total += ($lapangan->harga + 100000);
+            }
+        }
+
         $input = $request->all();
         $input = $request->except('user_id');
         if ($request->hasFile('bukti')) {
@@ -187,13 +253,29 @@ class BookingController extends Controller
             $request->bukti->storeAs('img', $fileName);
             // Storage::disk('public')->put($fileName, $request->file('bukti'));
             $input['bukti'] = $fileName;
+
+            $test = ['user_id' => Auth::id()];
+            // dd($test);
+            if ($test == ['user_id' => Auth::id()]) {
+                $booking->update([
+                    'lapangan_id' => $request['lapangan_id'],
+                    'time_from' => $request['time_from'],
+                    'time_to' => $request['time_to'],
+                    'status' => 'Belum Bayar DP',
+                    'bukti' => $input['bukti'] = $fileName,
+                    // 'user_id' => Auth::id(),
+                    'jam' => $jam,
+                    'total_harga' => $total,
+
+                    // $input
+
+                ]);
+            } else {
+                $booking->update([
+                    'status' => $request['time_to'],
+                ]);
+            }
         }
-        $booking->update(
-            $input
-            // 'bukti' => $input,
-            // // 'time_from' => $request['time_from'],
-            // // 'time_to' => $request['time_to'],
-        );
 
         return redirect('/booking/index');
     }

@@ -57,29 +57,23 @@ Index User
             </div>
         @enderror
       </div>
-      @if (is_null(@$booking->bukti))
+      @if(!empty($booking))
       <div class="mb-3 row mt-3">
-       
         <div class="col-sm-5">
           @if(!empty(@$booking->bukti))
-          <label for="foto_barang" class="col-sm-2 col-form-label">Bukti</label>
-          <img src="{{ $booking->bukti }}" class="mb-3" alt="foto" width="100px" />
-          <input type="file" class="form-control" name="bukti" id="bukti" placeholder="bukti">
+          <img src="{{ asset('storage/img/' . $booking->bukti) }}" class="mb-3" alt="foto" width="100px" />
+          
           @endif
-            
+          <label for="foto_barang" class="">Bayar DP sebesar 50% : @currency ( $booking->total_harga/2) </label>
+          <input type="file" class="form-control" name="bukti" id="bukti" placeholder="bukti">
           </div>
       </div>
       @error('bukti')
       <div class="alert alert-danger">
           {{ $message }}
-      </div>
-      @else
-      
+      </div>  
       @enderror
       @endif
-      
-     
-
               <div class="row justify-content-end">
                 <div class="col-sm-10">
                   <button type="submit" class="btn btn-primary">Send</button>
