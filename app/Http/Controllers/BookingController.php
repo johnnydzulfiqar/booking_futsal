@@ -261,7 +261,7 @@ class BookingController extends Controller
                     'lapangan_id' => $request['lapangan_id'],
                     'time_from' => $request['time_from'],
                     'time_to' => $request['time_to'],
-                    'status' => 'Belum Bayar DP',
+                    'status' => 'Pending',
                     'bukti' => $input['bukti'] = $fileName,
                     // 'user_id' => Auth::id(),
                     'jam' => $jam,
@@ -284,5 +284,11 @@ class BookingController extends Controller
         $data = Booking::find($id);
         $data->delete();
         return redirect('/booking/index')->with('success', 'Data Berhasil Dihapus');
+    }
+    public function invoice($id)
+    {
+        $data = Booking::find($id);
+        $pdf = PDF::loadview('booking.invoice', ['data' => $data]);
+        return $pdf->download('invoice.pdf');
     }
 }

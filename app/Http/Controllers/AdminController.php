@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+
 use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller
@@ -17,7 +18,30 @@ class AdminController extends Controller
     }
     public function create()
     {
-        return view('admin.create');
+        $user = User::all();
+        return view('admin.create', compact('user'));
+    }
+    public function store(Request $request)
+    {
+        $rules =
+            [
+                'name' => ['required', 'string', 'max:255'],
+                'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+                'password' => ['required', 'string', 'min:8'],
+                'alamat' => ['required', 'string', 'max:255'],
+                'type' => 'required',
+
+            ];
+        $this->validate($request, $rules);
+        // $input = $request->all();
+        User::create([
+            'name' => $request['name'],
+            'email' => $request['email'],
+            'password' => Hash::make($request['password']),
+            'alamat' => $request['alamat'],
+            'type' => $request['type'],
+        ]);
+        return redirect('/admin/index')->with('success', 'Data Berhasil Disimpan');
     }
     public function edit(User $admin)
     {
@@ -32,11 +56,19 @@ class AdminController extends Controller
                 'email' => 'required',
                 'password' => 'required',
                 'type' => 'required',
+                'alamat' => ['required', 'string', 'max:255'],
+
             ];
         $this->validate($request, $rules);
         $input = $request->all();
 
-        $admin->update($input);
+        $admin->update([
+            'name' => $request['name'],
+            'email' => $request['email'],
+            'password' => Hash::make($request['password']),
+            'alamat' => $request['alamat'],
+            'type' => $request['type'],
+        ]);
         return redirect(to: '/admin/index')->with('success', 'Data Berhasil Diupdate');
     }
 

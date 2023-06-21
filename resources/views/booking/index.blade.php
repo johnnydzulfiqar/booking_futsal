@@ -40,7 +40,7 @@
             <table id="example1" class="table table-bordered table-striped">
               <thead>
                 <tr>
-                  <th>No</th>
+                  {{-- <th>No</th> --}}
                   <th>Booking AN</th>
                   <th>Lapangan</th>
                   <th>Bukti</th>
@@ -59,7 +59,7 @@
                   @if ($user_id = Auth::user()->id === $item->user_id)  
                   <tr>
                                 
-                  <td>{{ $loop->iteration }}</td>
+                  {{-- <td>{{ $loop->iteration }}</td> --}}
                   <td>{{ $item->user->name }}</td>
                   <td>{{ $item->lapangan->nama }}</td>
                   @if (is_null($item->bukti))
@@ -77,7 +77,7 @@
 
 
                   <td>
-                    @if ($item->status=='Belum Bayar DP')
+                    @if ($item->status=='Pending')
                     <form action="/booking/{{  $item->id }}" method="POST">
                       @csrf
                       @method('delete')
@@ -102,6 +102,8 @@
                      
                         <a class="dropdown-item" href="/booking/{{ $item->id }}/show"
                           ><i class="bx bx-edit-alt me-2"></i> Detail</a>
+                          <a class="dropdown-item" href="/booking/{{ $item->id }}/invoice"
+                            ><i class="bx bx-edit-alt me-2"></i> Invoice</a>
                     </div>
                   </div>
 
@@ -114,7 +116,7 @@
                 </tbody>
                 <tfoot>
                 <tr>
-                  <th>No</th>
+                  {{-- <th>No</th> --}}
                   <th>Booking AN</th>
                   <th>Lapangan</th>
                   <th>Bukti</th>

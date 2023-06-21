@@ -39,11 +39,14 @@ Route::middleware(['auth', 'user-access:user'])->group(function () {
     Route::get('/user/{user}/edit', [AdminController::class, 'edit2'])->name(name: 'user.edit');
     Route::patch('/user/{user}', [AdminController::class, 'update2'])->name(name: 'user.update');
     Route::get('/booking/filter', [BookingController::class, 'filter']);
+    Route::get('/booking/{booking}/invoice', [BookingController::class, 'invoice']);
 });
 
 Route::middleware(['auth', 'user-access:admin'])->group(function () {
 
     Route::get('/admin/index', [AdminController::class, 'index'])->name('admin.index');
+    Route::get('/admin/create', [AdminController::class, 'create'])->name('admin.create');
+    Route::post('/admin/create', [AdminController::class, 'store']);
     Route::get('/admin/{admin}/edit', [AdminController::class, 'edit'])->name(name: 'admin.edit');
     Route::patch('/admin/{admin}', [AdminController::class, 'update'])->name(name: 'admin.update');
     Route::delete('/admin/{admin}', [AdminController::class, 'destroy'])->name(name: 'admin.delete');
