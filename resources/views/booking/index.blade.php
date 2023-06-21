@@ -90,6 +90,8 @@
                           ><i class="bx bx-edit-alt me-2"></i> Edit</a>
                           <a class="dropdown-item" href="/booking/{{ $item->id }}/show"
                             ><i class="bx bx-edit-alt me-2"></i> Detail</a>
+                            <a class="dropdown-item" href="/booking/{{ $item->id }}/invoice"
+                              ><i class="bx bx-edit-alt me-2"></i> Invoice</a>
                       </div>
                     </div>
                   </form>
@@ -102,8 +104,7 @@
                      
                         <a class="dropdown-item" href="/booking/{{ $item->id }}/show"
                           ><i class="bx bx-edit-alt me-2"></i> Detail</a>
-                          <a class="dropdown-item" href="/booking/{{ $item->id }}/invoice"
-                            ><i class="bx bx-edit-alt me-2"></i> Invoice</a>
+                          
                     </div>
                   </div>
 

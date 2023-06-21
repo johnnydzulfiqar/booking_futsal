@@ -61,7 +61,7 @@ class BookingController extends Controller
                 'time_from' => [
                     'required',
                     function ($attribute, $value, $fail) {
-                        $now = Carbon::parse($value . ':00:00');
+                        $now = Carbon::parse($value . ':00:00')->locale('id');
                         if ($now->lt(Carbon::parse($now)->setHours(7))) {
                             $fail('Jam Mulai tidak boleh kurang dari 07:00');
                         }
@@ -78,7 +78,7 @@ class BookingController extends Controller
                 'time_to' => [
                     'required',
                     function ($attribute, $value, $fail) {
-                        $now = Carbon::parse($value . ':00:00');
+                        $now = Carbon::parse($value . ':00:00')->locale('id');
                         if ($now->gte(Carbon::parse($now)->setHours(1)) && $now->lt(Carbon::parse($now)->setHours(7))) {
                             $fail('Jam Selesai tidak boleh lebih dari 24:00');
                         }
@@ -144,6 +144,16 @@ class BookingController extends Controller
                 $total += ($lapangan->harga + 100000);
             }
         }
+        // dd([
+        //     'lapangan_id' => $request['lapangan_id'],
+        //     'time_from' => $request['time_from'],
+        //     'time_to' => $request['time_to'],
+        //     'status' => 'Belum Bayar DP',
+        //     'bukti' => null,
+        //     'user_id' => Auth::id(),
+        //     'jam' => $jam,
+        //     'total_harga' => $total,
+        // ]);
 
         $data = Booking::create(
             [
@@ -156,8 +166,8 @@ class BookingController extends Controller
                 'jam' => $jam,
                 'total_harga' => $total,
             ]
-
         );
+
         return redirect('/booking/index')->with('success', 'Data Berhasil Disimpan');
     }
     public function show($id)
