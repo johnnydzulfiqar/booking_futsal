@@ -22,7 +22,7 @@ Index User
           </div>
           <div class="card-body">
             <h5>
-              Keterangan Harga Per Jam<br>
+              Keterangan Harga Per Jam<br><br>
               Jam 7-12 : @currency($data->harga)<br>
               Jam 13-18 : @currency($data->harga+50000)<br>
               Jam 19-23 : @currency($data->harga+100000)<br>
@@ -102,7 +102,7 @@ Index User
               <script>
                   $('.datetimepicker').datetimepicker({
                       // format: 'YYYY-MM-DD HH:mm',
-                      format: 'YYYY-MM-DD HH',
+                      format: 'YYYY-MM-DD HH:00',
                       locale: 'id',
                       sideBySide: true,
                       icons: {

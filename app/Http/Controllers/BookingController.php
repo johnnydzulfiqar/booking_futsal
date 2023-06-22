@@ -51,7 +51,7 @@ class BookingController extends Controller
     public function create()
     {
         $lapangan = Lapangan::all();
-        $data = Lapangan::all()->first();
+        $data = Lapangan::all('harga')->first();
         return view('booking.create', compact('lapangan', 'data'));
     }
     public function store(Request $request)
@@ -62,7 +62,7 @@ class BookingController extends Controller
                 'time_from' => [
                     'required',
                     function ($attribute, $value, $fail) {
-                        $now = Carbon::parse($value . ':00:00')->locale('id');
+                        $now = Carbon::parse($value . ':00')->locale('id');
                         if ($now->lt(Carbon::parse($now)->setHours(7))) {
                             $fail('Jam Mulai tidak boleh kurang dari 07:00');
                         }
@@ -79,7 +79,7 @@ class BookingController extends Controller
                 'time_to' => [
                     'required',
                     function ($attribute, $value, $fail) {
-                        $now = Carbon::parse($value . ':00:00')->locale('id');
+                        $now = Carbon::parse($value . ':00')->locale('id');
                         if ($now->gte(Carbon::parse($now)->setHours(1)) && $now->lt(Carbon::parse($now)->setHours(7))) {
                             $fail('Jam Selesai tidak boleh lebih dari 24:00');
                         }
@@ -101,8 +101,8 @@ class BookingController extends Controller
         //     $request->bukti->storeAs('bukti', $fileName);
         //     $input['bukti'] = $fileName;
         // }
-        $time_from = Carbon::parse($request->time_from . ':00:00');
-        $time_to = Carbon::parse($request->time_to . ':00:00');
+        $time_from = Carbon::parse($request->time_from . ':00');
+        $time_to = Carbon::parse($request->time_to . ':00');
         $jam = $time_from->diffInHours($time_to, false);
         $is_same_day = $time_from->diffInDays($time_to) === 0;
         if ($jam < 1) {
@@ -180,7 +180,8 @@ class BookingController extends Controller
     public function edit(Booking $booking)
     {
         $lapangan = Lapangan::all();
-        return view('booking.create', compact('booking', 'lapangan'));
+        $data = Lapangan::all('harga')->first();
+        return view('booking.create', compact('booking', 'lapangan', 'data'));
     }
     public function update(Booking $booking, Request $request)
     {
@@ -190,7 +191,7 @@ class BookingController extends Controller
                 'time_from' => [
                     'required',
                     function ($attribute, $value, $fail) {
-                        $now = Carbon::parse($value . ':00:00');
+                        $now = Carbon::parse($value . ':00');
                         if ($now->lt(Carbon::parse($now)->setHours(7))) {
                             $fail('Jam Mulai tidak boleh kurang dari 07:00');
                         }
@@ -202,7 +203,7 @@ class BookingController extends Controller
                 'time_to' => [
                     'required',
                     function ($attribute, $value, $fail) {
-                        $now = Carbon::parse($value . ':00:00');
+                        $now = Carbon::parse($value . ':00');
                         if ($now->gte(Carbon::parse($now)->setHours(1)) && $now->lt(Carbon::parse($now)->setHours(7))) {
                             $fail('Jam Selesai tidak boleh lebih dari 24:00');
                         }
@@ -219,8 +220,8 @@ class BookingController extends Controller
         //     $request->bukti->storeAs('bukti', $fileName);
         //     $input['bukti'] = $fileName;
         // }
-        $time_from = Carbon::parse($request->time_from . ':00:00');
-        $time_to = Carbon::parse($request->time_to . ':00:00');
+        $time_from = Carbon::parse($request->time_from . ':00');
+        $time_to = Carbon::parse($request->time_to . ':00');
         $jam = $time_from->diffInHours($time_to, false);
         $is_same_day = $time_from->diffInDays($time_to) === 0;
         if ($jam < 1) {
