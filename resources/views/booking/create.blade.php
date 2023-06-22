@@ -21,6 +21,13 @@ Index User
             <small class="text-muted float-end">Merged input group</small>
           </div>
           <div class="card-body">
+            <h5>
+              Keterangan Harga Per Jam<br>
+              Jam 7-12 : @currency($data->harga)<br>
+              Jam 13-18 : @currency($data->harga+50000)<br>
+              Jam 19-23 : @currency($data->harga+100000)<br>
+
+            </h5>
             <form>
               <label for="lapangan_id">Lapangan</label>
               <select name="lapangan_id" id="lapangan_id" class="form-control">
@@ -31,8 +38,8 @@ Index User
                     {{-- <option @selected(old('id', @$item->id) == @$item->id) value="{{ @$item->id }}">{{ $item->nama_ruangan }}</option> --}}
                     @endforeach
             </select>
-    
-            <input style="display: none;" type="text" hidden name="harga" value="{{ $item->harga }}" class="form-control">
+           
+            {{-- <input style="display: none;" type="text" hidden name="harga" value="{{ $item->harga }}" class="form-control"> --}}
      
             @error('lapangan_id')
             <div class="alert alert-danger">

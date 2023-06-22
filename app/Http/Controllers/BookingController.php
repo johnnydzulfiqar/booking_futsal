@@ -51,7 +51,8 @@ class BookingController extends Controller
     public function create()
     {
         $lapangan = Lapangan::all();
-        return view('booking.create', compact('lapangan'));
+        $data = Lapangan::all()->first();
+        return view('booking.create', compact('lapangan', 'data'));
     }
     public function store(Request $request)
     {
