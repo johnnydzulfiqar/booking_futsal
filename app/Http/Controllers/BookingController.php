@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-
+use App\Jobs\ProcessBooking;
 use App\Models\Lapangan;
 use App\Models\Booking;
 use App\Models\User;
@@ -46,7 +46,8 @@ class BookingController extends Controller
             ->orWhere('status', 'Selesai')
             ->get();
         $lapangan = Lapangan::all();
-        return view('jadwal.index', compact('booking', 'lapangan'));
+        $data = Lapangan::all('harga')->first();
+        return view('jadwal.index', compact('booking', 'lapangan', 'data'));
     }
     public function create()
     {
@@ -169,6 +170,9 @@ class BookingController extends Controller
             ]
         );
 
+        ProcessBooking::dispatch($data)
+            ->delay(now()->addHour());
+
         return redirect('/booking/index')->with('success', 'Data Berhasil Disimpan');
     }
     public function show($id)
@@ -190,26 +194,38 @@ class BookingController extends Controller
 
                 'time_from' => [
                     'required',
-                    function ($attribute, $value, $fail) {
+                    function ($attribute, $value, $fail) use ($booking) {
                         $now = Carbon::parse($value . ':00');
                         if ($now->lt(Carbon::parse($now)->setHours(7))) {
                             $fail('Jam Mulai tidak boleh kurang dari 07:00');
                         }
                         $today = Booking::query()
+                            ->whereNot('id', $booking->id)
                             ->where('time_from', 'like', $now->format('Y-m-d') . '%')
                             ->get();
+                        foreach ($today as $book) {
+                            if ($now->between(Carbon::parse($book->time_from), Carbon::parse($book->time_to))) {
+                                $fail('Waktu telah di booking');
+                            }
+                        }
                     }
                 ],
                 'time_to' => [
                     'required',
-                    function ($attribute, $value, $fail) {
+                    function ($attribute, $value, $fail) use ($booking) {
                         $now = Carbon::parse($value . ':00');
                         if ($now->gte(Carbon::parse($now)->setHours(1)) && $now->lt(Carbon::parse($now)->setHours(7))) {
                             $fail('Jam Selesai tidak boleh lebih dari 24:00');
                         }
                         $today = Booking::query()
+                            ->whereNot('id', $booking->id)
                             ->where('time_from', 'like', $now->format('Y-m-d') . '%')
                             ->get();
+                        foreach ($today as $book) {
+                            if ($now->between(Carbon::parse($book->time_from), Carbon::parse($book->time_to))) {
+                                $fail('Waktu telah di booking');
+                            }
+                        }
                     }
                 ]
                 // 'bukti' => 'mimes:jpg,png|max:1024',
@@ -244,10 +260,19 @@ class BookingController extends Controller
             $time_to->subMinute();
         }
         $today = Booking::query()
+            ->whereNot('id', $booking->id)
             ->where('time_from', 'like', $time_from->format('Y-m-d') . '%')
             ->get();
         for ($i = $jam_start; $i < $jam_end; $i++) {
             $check = Carbon::parse($time_from)->setHours($i);
+            foreach ($today as $book) {
+                if ($check->between(Carbon::parse($book->time_from), Carbon::parse($book->time_to))) {
+                    throw ValidationException::withMessages([
+                        'time_from' => 'Waktu telah di booking',
+                        'time_to' => 'Waktu telah di booking',
+                    ]);
+                }
+            }
 
             if ($i < 15) {
                 $total += $lapangan->harga;
@@ -287,6 +312,15 @@ class BookingController extends Controller
                     'status' => $request['time_to'],
                 ]);
             }
+        } else {
+            $booking->update([
+                'lapangan_id' => $request['lapangan_id'],
+                'time_from' => $request['time_from'],
+                'time_to' => $request['time_to'],
+                'status' => 'Pending',
+                'jam' => $jam,
+                'total_harga' => $total,
+            ]);
         }
 
         return redirect('/booking/index');
