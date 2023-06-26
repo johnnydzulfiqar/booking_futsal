@@ -112,8 +112,21 @@ Index User
                         next: 'fas fa-chevron-right',
                       },
                       minDate: new Date,
-                      stepping: 10
+                      stepping: 10,
+                      disabledHours: [0, 1, 2, 3, 4, 5, 6]
                   });
+
+                  if (@js($booking)) {
+                    $('#time_from').val(moment(@js($booking->time_from)).format('YYYY-MM-DD HH:00'));
+                    $('#time_to').val(moment(@js($booking->time_to)).format('YYYY-MM-DD HH:00'));
+                  }
+
+                  if (@js(old('time_from'))) {
+                    $('#time_from').val(moment(@js(old('time_from'))).format('YYYY-MM-DD HH:00'));
+                  }
+                  if (@js(old('time_to'))) {
+                    $('#time_to').val(moment(@js(old('time_to'))).format('YYYY-MM-DD HH:00'));
+                  }
               </script>
   {{-- </div> --}}
 @endsection
