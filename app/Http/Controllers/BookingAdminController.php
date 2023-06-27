@@ -44,7 +44,8 @@ class BookingAdminController extends Controller
             ->orWhere('status', 'Selesai')
             ->get();
         $lapangan = Lapangan::all();
-        return view('jadwal.index', compact('booking', 'lapangan'));
+        $data = Lapangan::all('harga')->first();
+        return view('jadwal.index', compact('booking', 'lapangan', 'data'));
     }
     public function show($id)
     {
