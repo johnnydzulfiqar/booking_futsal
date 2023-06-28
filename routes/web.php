@@ -40,6 +40,7 @@ Route::middleware(['auth', 'user-access:user'])->group(function () {
     Route::patch('/user/{user}', [AdminController::class, 'update2'])->name(name: 'user.update');
     Route::get('/booking/filter', [BookingController::class, 'filter']);
     Route::get('/booking/{booking}/invoice', [BookingController::class, 'invoice']);
+    Route::get('/booking/{booking}/invoice2', [BookingController::class, 'invoice2']);
 });
 
 Route::middleware(['auth', 'user-access:admin'])->group(function () {
@@ -65,4 +66,6 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
     Route::get('/bookingadmin/jadwal', [BookingAdminController::class, 'jadwal'])->name('jadwal.index');
     Route::get('/admin/filter', [BookingAdminController::class, 'filter']);
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
+    Route::post('/bookingadmin/{bookingadmin}/konfirmasi', [BookingAdminController::class, 'konfirmasi']);
+    Route::get('/bookingadmin/{bookingadmin}/show', [BookingAdminController::class, 'show'])->name('booking.show');
 });

@@ -16,11 +16,11 @@
           <!-- /.card-header -->
           <div class="card-body">
            
-            @if ($data?->lapangan->status == 'Tidak Aktif')
+            {{-- @if ($data?->lapangan->status == 'Tidak Aktif')
                 <h3 style="color: red">Lapangan Tutup</h3>
             @else
             <a class="btn btn-primary mb-3" href="/booking/create" role="button">Booking Baru</a>
-            @endif
+            @endif --}}
 
             <form method="GET" action="/booking/filter">
               <div class="row pb-3">
@@ -77,7 +77,7 @@
 
 
                   <td>
-                    @if ($item->status=='Pending')
+                    @if ($item->status=='Masuk Jadwal')
                     <form action="/booking/{{  $item->id }}" method="POST">
                       @csrf
                       @method('delete')
@@ -86,8 +86,7 @@
                         Action
                       </button>
                       <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                        <a class="dropdown-item" href="/booking/{{ $item->id }}/edit"
-                          ><i class="bx bx-edit-alt me-2"></i> Edit</a>
+                        
                           <a class="dropdown-item" href="/booking/{{ $item->id }}/show"
                             ><i class="bx bx-edit-alt me-2"></i> Detail</a>
                             <a class="dropdown-item" href="/booking/{{ $item->id }}/invoice"
@@ -104,6 +103,8 @@
                      
                         <a class="dropdown-item" href="/booking/{{ $item->id }}/show"
                           ><i class="bx bx-edit-alt me-2"></i> Detail</a>
+                          <a class="dropdown-item" href="/booking/{{ $item->id }}/edit"
+                            ><i class="bx bx-edit-alt me-2"></i> Edit</a>
                           
                     </div>
                   </div>

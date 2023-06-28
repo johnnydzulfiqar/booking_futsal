@@ -179,7 +179,9 @@ class BookingController extends Controller
     {
         $booking = Booking::findOrfail($id);
         $lapangan = Lapangan::all();
-        return view('booking.show', compact('booking', 'lapangan'));
+        $orderDate = Booking::findOrfail($id)->created_at;
+        $paymentDue = (new \DateTime($orderDate))->modify('+1 hour')->format('Y-m-d H:i:s');
+        return view('booking.show', compact('booking', 'lapangan', 'paymentDue'));
     }
     public function edit(Booking $booking)
     {
@@ -336,5 +338,12 @@ class BookingController extends Controller
         $data = Booking::find($id);
         $pdf = PDF::loadview('booking.invoice', ['data' => $data]);
         return $pdf->download('invoice.pdf');
+    }
+    public function invoice2($id)
+    {
+        $data = Booking::find($id);
+        $orderDate = date('Y-m-d H:i:s');
+        $paymentDue = (new \DateTime($orderDate))->modify('+1 hour')->format('Y-m-d H:i:s');
+        return view('booking.invoice2', compact('data'));
     }
 }

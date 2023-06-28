@@ -70,7 +70,7 @@
 
                   <td>
 
-                    <form action="/bookingadmin/{{  $item->id }}" method="POST">
+                    <form action="/bookingadmin/{{ $item->id }}" method="POST">
                       @csrf
                       @method('delete')
                     <div class="dropdown">
@@ -78,14 +78,28 @@
                         Action
                       </button>
                       <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                        <a class="dropdown-item" href="/bookingadmin/{{ $item->id }}/edit"
-                          ><i class="bx bx-edit-alt me-2"></i> Edit</a>
-                         
+                        <a class="dropdown-item" href="/bookingadmin/{{ $item->id }}/edit">
+                          <i class="bx bx-edit-alt me-2"></i> Edit</a>
+                          <a class="dropdown-item" href="/bookingadmin/{{ $item->id }}/show">
+                            <i class="bx bx-edit-alt me-2"></i> show</a>
                             <input type="submit" class="btn btn-danger btn-sm" value="delete">
                       </div>
                     </div>
                   </form>
-                
+                  <form action="/bookingadmin/{bookingadmin}/konfirmasi" method="post" enctype="multipart/form-data">
+                    @csrf 
+                    <input style="display: none;" type="text" hidden name="id" value="{{ $item->id }}" class="form-control">
+                    <input style="display: none;" type="text" hidden name="status" value="Masuk Jadwal" class="form-control">
+                @if ($item->status == 'Pending')
+                <button type="submit" class="btn btn-success mb-2 mt-2">Konfirmasi</button>
+                @endif
+                <form action="/bookingadmin/{bookingadmin}/konfirmasi" method="post" enctype="multipart/form-data">
+                  @csrf 
+                  <input style="display: none;" type="text" hidden name="id" value="{{ $item->id }}" class="form-control">
+                  <input style="display: none;" type="text" hidden name="status" value="Reject" class="form-control">
+              @if ($item->status == 'Pending')
+              <button type="submit" class="btn btn-danger mb-2">Reject</button>
+              @endif
                   </td>        
                   </tr>  
                         

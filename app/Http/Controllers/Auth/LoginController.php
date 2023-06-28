@@ -55,8 +55,11 @@ class LoginController extends Controller
                 return redirect()->route('booking.index');
             }
         } else {
-            return redirect()->route('login')
-                ->with('error', 'Email-Address And Password Are Wrong.');
+            return back()->withErrors([
+                'email' => 'Email atau Password Salah.',
+                'password' => 'Email atau Password Salah.',
+
+            ])->onlyInput('email', 'password');
         }
     }
 }

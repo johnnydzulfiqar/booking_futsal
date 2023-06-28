@@ -49,8 +49,11 @@ class BookingAdminController extends Controller
     }
     public function show($id)
     {
-        $data = Booking::findOrfail($id);
-        return view('bookingadmin.show', compact('data'));
+        $booking = Booking::findOrfail($id);
+        $lapangan = Lapangan::all();
+        $orderDate = Booking::findOrfail($id)->created_at;
+        $paymentDue = (new \DateTime($orderDate))->modify('+1 hour')->format('Y-m-d H:i:s');
+        return view('booking.show', compact('booking', 'lapangan', 'paymentDue'));
     }
     public function edit(Booking $booking)
     {
@@ -79,5 +82,12 @@ class BookingAdminController extends Controller
         $data = Booking::find($id);
         $data->delete();
         return redirect('/bookingadmin/index')->with('success', 'Data Berhasil Dihapus');
+    }
+    public function konfirmasi(Booking $id, Request $request)
+    {
+        $data = Booking::find($request->id);
+        $data->status = $request->status;
+        $data->save();
+        return redirect('/bookingadmin/index');
     }
 }

@@ -21,16 +21,16 @@ Index User
             <small class="text-muted float-end">Merged input group</small>
           </div>
           <div class="card-body">
-            <h5>
-              Keterangan Harga Per Jam<br><br>
-              Jam 7-12 : @currency($data->harga)<br>
-              Jam 13-18 : @currency($data->harga+50000)<br>
-              Jam 19-23 : @currency($data->harga+100000)<br>
-
-            </h5>
+            <h4 class="mb-4">Keterangan Harga</h4>
+              <!-- List with bullets -->
+                <ul class="list-bullets">
+                    <li class="mb-2"> Jam 7-12 : @currency($data->harga)</li>
+                    <li class="mb-2"> Jam 13-18 : @currency($data->harga+50000)</li>
+                    <li class="mb-2">Jam 19-23 : @currency($data->harga+100000)</li>
+                </ul>
             <form>
-              <label for="lapangan_id">Lapangan</label>
-              <select name="lapangan_id" id="lapangan_id" class="form-control">
+              {{-- <label for="lapangan_id">Lapangan</label> --}}
+              <select hidden name="lapangan_id" id="lapangan_id" class="form-control">
                 {{-- <option value="">Pilih Ruangan</option> --}}
                 @foreach ($lapangan as $item)
                     <option value="{{ $item->id }}">{{ $item->nama }}</option>
@@ -71,7 +71,11 @@ Index User
           <img src="{{ asset('storage/img/' . $booking->bukti) }}" class="mb-3" alt="foto" width="100px" />
           
           @endif
+          <span class="badge badge-info">Batas Pembayaran {{ \Carbon\Carbon::parse($booking->created_at)->modify('+1 hour')->format('j F, Y, H:i:s') }}</span>
           <label for="foto_barang" class="">Bayar DP sebesar 50% : @currency ( $booking->total_harga/2) </label>
+          <label>Ke Rekening BRI : 01110022 </label><br>
+          <label>Atas Nama : Meiliani Ajang </label>
+
           <input type="file" class="form-control" name="bukti" id="bukti" placeholder="bukti">
           </div>
       </div>
@@ -93,7 +97,7 @@ Index User
     </form>
     </div>
           <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-          <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
+          {{-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script> --}}
           <script src="https://cdn.datatables.net/select/1.2.0/js/dataTables.select.min.js"></script>
           <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.min.js"></script>
           <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>

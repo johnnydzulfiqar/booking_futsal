@@ -38,6 +38,8 @@ Index User
                 {{ $message }}
             </div>
         @enderror
+       
+
         <div class="form-group mb-2">
           <label for="time_from">Booking Atas Nama</label>
           <input type="text" class="form-control" id="nama" name="user_id" value="{{ $booking->user->name }}" disabled/>

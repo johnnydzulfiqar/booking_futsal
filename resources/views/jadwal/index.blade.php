@@ -24,6 +24,60 @@
             ]);
         }
     @endphp
+    <style>
+        .list-bullets {
+    list-style: none;
+}
+
+.list-bullets li {
+    display: flex;
+    align-items: center;
+}
+
+.list-bullets li::before {
+    content: '';
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #5784d7;
+    border: 2px solid #8fb3f5;
+    display: block;
+    margin-right: 1rem;
+}
+
+/* Unordered list with custom numbers style */
+ol.custom-numbers {
+    list-style: none;
+}
+
+ol.custom-numbers li {
+    counter-increment: my-awesome-counter;
+}
+
+ol.custom-numbers li::before {
+    content: counter(my-awesome-counter) ". ";
+    color: #2b90d9;
+    font-weight: bold;
+}
+
+
+/*
+*
+* ==========================================
+* FOR DEMO PURPOSES
+* ==========================================
+*
+*/
+body {
+    min-height: 100vh;
+    background-color: #6190e8;
+    background-image: linear-gradient(to right, #5784d7 0%, #a7bfe8 100%);
+}
+
+li {
+    font-style: italic;
+}
+    </style>
     <div id='calendar'></div>
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
@@ -38,16 +92,21 @@
                     <form action="{{ url('booking/create')}}" method="POST">
                         @csrf
                         <div class="col-xxl">
-                            <div class="card mb-4">
+                            <div class="card mb-5">
                                 <div class="card-body">
-                                    <h5>
-                                        Keterangan Harga Per Jam<br><br>
-                                        Jam 7-12 : @currency($data->harga)<br>
-                                        Jam 13-18 : @currency($data->harga+50000)<br>
-                                        Jam 19-23 : @currency($data->harga+100000)<br>
-                                    </h5>
-                                    <label for="lapangan_id">Lapangan</label>
-                                    <select name="lapangan_id" id="lapangan_id" class="form-control">
+                                   
+                                       
+                                            <h4 class="mb-4">Keterangan Harga</h4>
+                                            <!-- List with bullets -->
+                                            <ul class="list-bullets">
+                                                <li class="mb-2"> Jam 7-12 : @currency($data->harga)</li>
+                                                <li class="mb-2"> Jam 13-18 : @currency($data->harga+50000)</li>
+                                                <li class="mb-2">Jam 19-23 : @currency($data->harga+100000)</li>
+                                            </ul>
+                                       
+                                 
+                                    {{-- <label for="lapangan_id">Lapangan</label> --}}
+                                    <select hidden name="lapangan_id" id="lapangan_id" class="form-control">
                                         @foreach ($lapangan as $item)
                                             <option value="{{ $item->id }}">{{ $item->nama }}</option>
                                         @endforeach
