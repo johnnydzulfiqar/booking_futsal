@@ -74,10 +74,16 @@ Index User
       
       @else --}}
       <div class="mb-3 row mt-3">
-        <label for="foto_barang" class="col-sm-2 col-form-label">Bayar DP sebesar 50% : @currency ( $booking->total_harga/2) </label>
+        {{-- <label for="foto_barang" class="col-sm-2 col-form-label">Bayar DP sebesar 50% : @currency ( $booking->total_harga/2) </label> --}}
         <div class="col-sm-5">
           @if(!empty(@$booking->bukti))
-          <img src="{{ asset('storage/img/' . $booking->bukti) }}" class="mb-3" alt="foto" width="240px" />
+          <img src="{{ asset('storage/img/' . $booking->bukti) }}" class="mb-3" alt="foto" width="240px" id="geeks"/><br>
+          <button type="button" onclick="zoomin()">
+            Zoom-In
+        </button>
+        <button type="button" onclick="zoomout()"> 
+          Zoom-Out
+      </button> <br>
           @else
           {{-- <input type="file" class="form-control" name="bukti" id="bukti" placeholder="bukti"> --}}
           @endif
@@ -109,6 +115,7 @@ Index User
       </div>
     </form>
     </div>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
           <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
                   <script src="https://cdn.datatables.net/select/1.2.0/js/dataTables.select.min.js"></script>
@@ -127,7 +134,19 @@ Index User
                       next: 'fas fa-chevron-right'
                       },
                       stepping: 10
+                     
                   });
+                  function zoomin() {
+            var GFG = document.getElementById("geeks");
+            var currWidth = GFG.clientWidth;
+            GFG.style.width = (currWidth + 100) + "px";
+        }
+          
+        function zoomout() {
+            var GFG = document.getElementById("geeks");
+            var currWidth = GFG.clientWidth;
+            GFG.style.width = (currWidth - 100) + "px";
+        }
               </script>
   {{-- </div> --}}
 @endsection

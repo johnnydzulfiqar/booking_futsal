@@ -78,8 +78,8 @@
                         Action
                       </button>
                       <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                        <a class="dropdown-item" href="/bookingadmin/{{ $item->id }}/edit">
-                          <i class="bx bx-edit-alt me-2"></i> Edit</a>
+                        {{-- <a class="dropdown-item" href="/bookingadmin/{{ $item->id }}/edit">
+                          <i class="bx bx-edit-alt me-2"></i> Edit</a> --}}
                           <a class="dropdown-item" href="/bookingadmin/{{ $item->id }}/show">
                             <i class="bx bx-edit-alt me-2"></i> show</a>
                             <input type="submit" class="btn btn-danger btn-sm" value="delete">

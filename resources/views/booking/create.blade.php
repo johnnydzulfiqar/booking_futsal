@@ -4,8 +4,56 @@
 Index User
 @endsection
 @section('content')
+<style>
+  .list-bullets {
+list-style: none;
+}
+
+.list-bullets li {
+display: flex;
+align-items: center;
+}
+
+.list-bullets li::before {
+content: '';
+width: 12px;
+height: 12px;
+border-radius: 50%;
+background: #5784d7;
+border: 2px solid #8fb3f5;
+display: block;
+margin-right: 1rem;
+}
+
+/* Unordered list with custom numbers style */
+ol.custom-numbers {
+list-style: none;
+}
+
+ol.custom-numbers li {
+counter-increment: my-awesome-counter;
+}
+
+ol.custom-numbers li::before {
+content: counter(my-awesome-counter) ". ";
+color: #2b90d9;
+font-weight: bold;
+}
+
+
+/*
+*
+* ==========================================
+* FOR DEMO PURPOSES
+* ==========================================
+*
+*/
+li {
+font-style: italic;
+}
+</style>
 <div class="container-xxl flex-grow-1 container-p-y">
-    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Forms/</span> Horizontal Layouts</h4>
+    {{-- <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Forms Edit</h4> --}}
     <!-- Basic Layout & Basic with Icons -->
     {{-- <div class="row"> --}}
         <!-- Basic with Icons -->
@@ -17,8 +65,8 @@ Index User
             <div class="col-xxl">
         <div class="card mb-4">
           <div class="card-header d-flex align-items-center justify-content-between">
-            <h5 class="mb-0">Basic with Icons</h5>
-            <small class="text-muted float-end">Merged input group</small>
+            <h5 class="mb-0">Form edit</h5>
+            {{-- <small class="text-muted float-end">Merged input group</small> --}}
           </div>
           <div class="card-body">
             <h4 class="mb-4">Keterangan Harga</h4>
@@ -68,8 +116,13 @@ Index User
       <div class="mb-3 row mt-3">
         <div class="col-sm-5">
           @if(!empty(@$booking->bukti))
-          <img src="{{ asset('storage/img/' . $booking->bukti) }}" class="mb-3" alt="foto" width="100px" />
-          
+          <img src="{{ asset('storage/img/' . $booking->bukti) }}" class="mb-3" alt="foto" width="300px" id="geeks" /><br>
+          <button type="button" onclick="zoomin()">
+            Zoom-In
+        </button>
+        <button type="button" onclick="zoomout()"> 
+          Zoom-Out
+      </button> <br>
           @endif
           <span class="badge badge-info">Batas Pembayaran {{ \Carbon\Carbon::parse($booking->created_at)->modify('+1 hour')->format('j F, Y, H:i:s') }}</span>
           <label for="foto_barang" class="">Bayar DP sebesar 50% : @currency ( $booking->total_harga/2) </label>
@@ -96,6 +149,7 @@ Index User
       </div>
     </form>
     </div>
+          <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
           <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
           {{-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script> --}}
           <script src="https://cdn.datatables.net/select/1.2.0/js/dataTables.select.min.js"></script>
@@ -131,6 +185,17 @@ Index User
                   if (@js(old('time_to'))) {
                     $('#time_to').val(moment(@js(old('time_to'))).format('YYYY-MM-DD HH:00'));
                   }
+                  function zoomin() {
+            var GFG = document.getElementById("geeks");
+            var currWidth = GFG.clientWidth;
+            GFG.style.width = (currWidth + 100) + "px";
+        }
+          
+        function zoomout() {
+            var GFG = document.getElementById("geeks");
+            var currWidth = GFG.clientWidth;
+            GFG.style.width = (currWidth - 100) + "px";
+        }
               </script>
   {{-- </div> --}}
 @endsection

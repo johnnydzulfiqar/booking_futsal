@@ -77,7 +77,7 @@ Index User
           <label>Bayar DP sebesar 50% : @currency ( $booking->total_harga/2)</label>
           @if(!empty(@$booking->bukti))
           
-          <img src="{{ asset('storage/img/' . $booking->bukti) }}" class="mb-3" alt="foto" width="240px" />
+          <img src="{{ asset('storage/img/' . $booking->bukti) }}" class="mb-3" alt="foto" width="240px" id="geeks"/>
           @endif
               {{-- <input type="file" class="form-control" name="bukti" id="bukti" placeholder="bukti"> --}}
           </div>
@@ -137,6 +137,17 @@ Index User
                       },
                       stepping: 10
                   });
+                  function zoomin() {
+            var GFG = document.getElementById("geeks");
+            var currWidth = GFG.clientWidth;
+            GFG.style.width = (currWidth + 100) + "px";
+        }
+          
+        function zoomout() {
+            var GFG = document.getElementById("geeks");
+            var currWidth = GFG.clientWidth;
+            GFG.style.width = (currWidth - 100) + "px";
+        }
               </script>
   {{-- </div> --}}
 @endsection

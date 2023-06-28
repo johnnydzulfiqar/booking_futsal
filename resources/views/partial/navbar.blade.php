@@ -31,6 +31,13 @@
             <img src="{{ asset('layout/dist/img/user.png') }}" width="40" height="40" class="rounded-circle">
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            @if ( auth()->user()->type == 'admin') 
+                                    <a class="dropdown-item" href="/admin/{{ Auth::user()->id }}/edit" class="d-block">Profile</a>
+                                    @endif
+                                    @if ( auth()->user()->type == 'user') 
+                                    <a class="dropdown-item" href="/user/{{ Auth::user()->id }}/edit" class="d-block">Profile</a>
+                                    @endif
+                                    
             <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
