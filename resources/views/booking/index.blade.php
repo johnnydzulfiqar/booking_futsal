@@ -69,8 +69,8 @@
                   <td>Sudah Bayar DP</td>
                   @endif
                 
-                  <td>{{ $item->time_from }}</td>  
-                  <td>{{ $item->time_to }}</td> 
+                  <td>{{ Carbon\Carbon::parse($item->time_from)->format('d-M-Y H:00') }}</td>  
+                  <td>{{ Carbon\Carbon::parse($item->time_to)->format('d-M-Y H:00') }}</td> 
                   <td>{{ $item->jam }}</td>    
                   <td>@currency ($item->total_harga)</td>    
                   <td>{{ $item->status }}</td>    
@@ -110,6 +110,13 @@
                   </div>
 
                 @endif  
+                <form action="/booking/{{ $item->id }}" method="POST">
+                  @csrf 
+                  @method('delete')
+              @if ($item->status == 'Pending')
+              <input type="submit" class="btn btn-danger mt-2" value="Batal">
+              @endif
+            </form>
                   </td>        
                   </tr>  
                   @endif

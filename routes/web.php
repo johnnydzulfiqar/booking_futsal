@@ -41,6 +41,7 @@ Route::middleware(['auth', 'user-access:user'])->group(function () {
     Route::get('/booking/filter', [BookingController::class, 'filter']);
     Route::get('/booking/{booking}/invoice', [BookingController::class, 'invoice']);
     Route::get('/booking/{booking}/invoice2', [BookingController::class, 'invoice2']);
+    Route::delete('/booking/{booking}', [BookingController::class, 'destroy'])->name(name: 'booking.delete');
 });
 
 Route::middleware(['auth', 'user-access:admin'])->group(function () {

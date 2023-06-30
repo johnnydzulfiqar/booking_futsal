@@ -4,138 +4,142 @@
 Index User
 @endsection
 @section('content')
-<div class="container-xxl flex-grow-1 container-p-y">
-    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Forms/</span> Horizontal Layouts</h4>
-    <!-- Basic Layout & Basic with Icons -->
-    {{-- <div class="row"> --}}
-        <!-- Basic with Icons -->
-        <form action="{{ !empty($booking) ? route('booking.update', $booking): url('bookingadmin/create')}}" method="POST" enctype="multipart/form-data">
-            @if(!empty($booking))
-            @method('PATCH')
-            @endif
-            @csrf
-            <div class="col-xxl">
-        <div class="card mb-4">
-          <div class="card-header d-flex align-items-center justify-content-between">
-            <h5 class="mb-0">Basic with Icons</h5>
-            <small class="text-muted float-end">Merged input group</small>
-          </div>
-          <div class="card-body">
-            <form>
-              <label for="lapangan_id">Lapangan</label>
-              <select name="lapangan_id" id="lapangan_id" class="form-control" disabled>
-                {{-- <option value="">Pilih Ruangan</option> --}}
-                @foreach ($lapangan as $item)
-                    <option value="{{ $item->id }}">{{ $item->nama }}</option>
-                    {{-- <option @selected(old('nama_ruangan', @$item->nama_ruangan) == '' ) value="">- Pilih Lantai -</option> --}}
-                    {{-- <option @selected(old('id', @$item->id) == @$item->id) value="{{ @$item->id }}">{{ $item->nama_ruangan }}</option> --}}
-              
-            </select>
-            <input style="display: none;" type="text" hidden name="harga" value="{{ $item->harga }}" class="form-control">
-            @endforeach
-            @error('lapangan_id')
-            <div class="alert alert-danger">
-                {{ $message }}
-            </div>
-        @enderror
-       
+<style>
+    body{margin-top:5px;
+background-color:#eee;
+}
 
-        <div class="form-group mb-2">
-          <label for="time_from">Booking Atas Nama</label>
-          <input type="text" class="form-control" id="nama" name="user_id" value="{{ $booking->user->name }}" disabled/>
-      </div>
-        <div class="form-group mb-2">
-          <label for="time_from">Jam Mulai</label>
-          <input type="text" class="form-control datetimepicker" id="time_from" name="time_from" value="{{ old('time_from', @$booking->time_from) }}" disabled/>
-          @error('time_from')
-            <div class="alert alert-danger">
-                {{ $message }}
-            </div>
-        @enderror
-      </div>
-      <div class="form-group mb-2">
-          <label for="time_to">Jam Berakir</label>
-          <input type="text" class="form-control datetimepicker" id="time_to" name="time_to" value="{{ old('time_to', @$booking->time_to) }}" disabled/>
-          @error('time_to')
-            <div class="alert alert-danger">
-                {{ $message }}
-            </div>
-        @enderror
-      </div>
-      <div class="form-group mb-2">
-        <label for="time_from">Jam Booking</label>
-        <input type="text" class="form-control" id="nama" name="user_id" value="{{ $booking->jam }}" disabled/>
-    </div>
-    <div class="form-group mb-2">
-      <label for="time_from">Total Bayar</label>
-      <input type="text" class="form-control" id="nama" name="user_id" value="@currency ( $booking->total_harga)" disabled/>
-  </div>
-      {{-- @if (is_null(@$booking->bukti))
-      
-      @else --}}
-      <div class="mb-3 row mt-3">
-        {{-- <label for="foto_barang" class="col-sm-2 col-form-label">Bayar DP sebesar 50% : @currency ( $booking->total_harga/2) </label> --}}
-        <div class="col-sm-5">
-          @if(!empty(@$booking->bukti))
-          <img src="{{ asset('storage/img/' . $booking->bukti) }}" class="mb-3" alt="foto" width="240px" id="geeks"/><br>
-          <button type="button" onclick="zoomin()">
-            Zoom-In
-        </button>
-        <button type="button" onclick="zoomout()"> 
-          Zoom-Out
-      </button> <br>
-          @else
-          {{-- <input type="file" class="form-control" name="bukti" id="bukti" placeholder="bukti"> --}}
-          @endif
-             
-          </div>
-      </div>
-      @error('bukti')
-      <div class="alert alert-danger">
-          {{ $message }}
-      </div>
-      @enderror
-      {{-- @endif --}}
-    
-            </div>
-     
+.card {
+    box-shadow: 0 20px 27px 0 rgb(0 0 0 / 5%);
+}
+.card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 0 solid rgba(0,0,0,.125);
+    border-radius: 1rem;
+}
+</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css" integrity="sha256-2XFplPlrFClt0bIdPgpz8H7ojnk10H69xRqd9+uTShA=" crossorigin="anonymous" />
 
-              {{-- <div class="row justify-content-end">
-                <div class="col-sm-10">
-                  @if(!empty(@$booking->bukti))
-                 
-                  @else
-                  <button type="submit" class="btn btn-primary">Send</button>
-                  @endif --}}
+<div class="container mt-5">
+<div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="invoice-title">
+                       
+                        <div class="mb-4">
+                          
+                            
+                        </div>
+                        <div class="text-muted">
+                            <p class="mb-1">Booking Atas Nama : {{ $booking->user->name }}</p>
+                            <p class="mb-1"><i class="uil uil-envelope-alt me-1">Email : {{ $booking->user->email }}</p>
+                            {{-- <p><i class="uil uil-phone me-1"></i> 012-345-6789</p> --}}
+                        </div>
+                    </div>
+
+                    <hr class="my-4">
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="text-muted">
+                                <h5 class="font-size-16 mb-3">Status   : {{ $booking->status }}</h5>
+                                <img class="card-img-top" style="width: 200px" src="{{ asset('storage/img/' . $booking->bukti) }}" alt="Card image cap">
+                               
+                                {{-- <button type="button" onclick="zoomin()">
+                                    Zoom-In
+                                </button>
+                                <button type="button" onclick="zoomout()"> 
+                                  Zoom-Out
+                              </button> <br> --}}
+                                {{-- <h5 class="font-size-15 mb-2">Preston Miller</h5>
+                                <p class="mb-1">4068 Post Avenue Newfolden, MN 56738</p>
+                                <p class="mb-1">PrestonMiller@armyspy.com</p>
+                                <p>001-234-5678</p> --}}
+                            </div>
+                        </div>
+                        <!-- end col -->
+                        <div class="col-sm-6">
+                            <div class="text-muted text-sm-end">
+                                <div>
+                                    <h5 class="font-size-15 mb-1">Laporan No:</h5>
+                                    <p>{{ $booking->id  }}{{ $booking->created_at->format('mdY') }}</p>
+                                </div>
+                                <div class="mt-4">
+                                    <h5 class="font-size-15 mb-1">Tanggal Laporan:</h5>
+                                    <p>{{ $booking->created_at->format('d-M-Y') }}</p>
+                                </div>
+                                {{-- <div class="mt-4">
+                                    <h5 class="font-size-15 mb-1">Kode Ring :</h5>
+                                    <p>{{ $data->kode_ring }}</p>
+                                </div> --}}
+                            </div>
+                        </div>
+                        <!-- end col -->
+                    </div>
+                    <!-- end row -->
+                    
+                    <div class="py-2">
+                        <h5 class="font-size-15">Laporan barang Summary</h5>
+
+                        <div class="table-responsive">
+                            <table class="table align-middle table-nowrap table-centered mb-0">
+                                <thead>
+                                    <tr>
+                                        {{-- <th style="width: 70px;">No.</th> --}}
+                                        <th>Jam Mulai</th>
+                                        <th>Jam Selesai</th>
+                                        <th>Total Jam</th>
+                                        <th>Harga per jam</th>
+                                        {{-- <th>Total Harga</th> --}}
+                                        {{-- <th>Keterangan</th> --}}
+
+
+                                        <th class="text-end" style="width: 120px;">Total</th>
+                                    </tr>
+                                </thead><!-- end thead -->
+                                <tbody>
+                                    <tr>
+                                        {{-- <th scope="row">01</th> --}}
+                                        
+                                        <td>{{ Carbon\Carbon::parse($booking->time_from)->format('d-M-Y H:00') }}</td>
+                                        <td>{{ Carbon\Carbon::parse($booking->time_to)->format('d-M-Y H:00') }}</td>
+                                        <td>{{ $booking->jam }}</td>
+
+                                        {{-- <td class="text-end">@currency($data->stok * $data->harga_barang)</td> --}}
+                                        <td>@currency ($booking->total_harga )</td>
+                                        <td>@currency ( $booking->total_harga*$booking->jam )</td>
+
+                                        {{-- <td>{{ $data->keterangan }}</td> --}}
+
+                                        
+                                    </tr>
+                                    <!-- end tr -->
+                                   
+                                    <!-- end tr -->
+                                </tbody><!-- end tbody -->
+                            </table><!-- end table -->
+                        </div><!-- end table responsive -->
+                        <div class="d-print-none mt-4">
+                            <div class="float-end">
+                                <a href="javascript:window.print()" class="btn btn-success me-1"><i class="fa fa-print"></i></a>
+                                {{-- <a href="#" class="btn btn-primary w-md">Send</a> --}}
+                            </div>
+                        </div>
+                    </div>
                 </div>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-    </form>
+            </div>
+        </div><!-- end col -->
     </div>
-    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-          <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
-                  <script src="https://cdn.datatables.net/select/1.2.0/js/dataTables.select.min.js"></script>
-          <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.min.js"></script>
-              <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
+</div>
+
               <script>
-                  $('.datetimepicker').datetimepicker({
-                      // format: 'YYYY-MM-DD HH:mm',
-                      format: 'YYYY-MM-DD HH',
-                      locale: 'en',
-                      sideBySide: true,
-                      icons: {
-                      up: 'fas fa-chevron-up',
-                      down: 'fas fa-chevron-down',
-                      previous: 'fas fa-chevron-left',
-                      next: 'fas fa-chevron-right'
-                      },
-                      stepping: 10
-                     
-                  });
                   function zoomin() {
             var GFG = document.getElementById("geeks");
             var currWidth = GFG.clientWidth;
@@ -148,5 +152,4 @@ Index User
             GFG.style.width = (currWidth - 100) + "px";
         }
               </script>
-  {{-- </div> --}}
 @endsection
