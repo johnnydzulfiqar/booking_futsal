@@ -113,7 +113,7 @@
                 <form action="/booking/{{ $item->id }}" method="POST">
                   @csrf 
                   @method('delete')
-              @if ($item->status == 'Pending')
+              @if ($item->status == 'Belum Bayar DP')
               <input type="submit" class="btn btn-danger mt-2" value="Batal">
               @endif
             </form>

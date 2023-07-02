@@ -50,8 +50,11 @@ background-color:#eee;
                         <div class="col-sm-6">
                             <div class="text-muted">
                                 <h5 class="font-size-16 mb-3">Status   : {{ $booking->status }}</h5>
+                                @if(!empty(@$booking->bukti))
                                 <img class="card-img-top" style="width: 200px" src="{{ asset('storage/img/' . $booking->bukti) }}" alt="Card image cap">
-                               
+                               @else
+                               <h5 class="font-size-16 mb-3" style="color: red">Belum bayar DP</h5>
+                               @endif
                                 {{-- <button type="button" onclick="zoomin()">
                                     Zoom-In
                                 </button>

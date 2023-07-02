@@ -89,6 +89,15 @@ li {
                     <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
+                @if ($data->status == 'Tidak Aktif')                    
+                        <div class="modal-body">
+                          <h3>Lapangan Tutup</h3>
+                        </div>
+                        
+                      </div>
+                    </div>
+                  </div>
+                @else
                 <div class="modal-body">
                     <form action="{{ url('booking/create')}}" method="POST">
                         @csrf
@@ -143,6 +152,8 @@ li {
                         </div>
                     </form>
                 </div>
+                @endif
+                
             </div>
         </div>
     </div>

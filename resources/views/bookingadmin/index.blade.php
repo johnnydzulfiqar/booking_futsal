@@ -86,19 +86,21 @@
                       </div>
                     </div>
                   </form>
+                  @if ($item->status == 'Pending')
                   <form action="/bookingadmin/{bookingadmin}/konfirmasi" method="post" enctype="multipart/form-data">
                     @csrf 
                     <input style="display: none;" type="text" hidden name="id" value="{{ $item->id }}" class="form-control">
                     <input style="display: none;" type="text" hidden name="status" value="Masuk Jadwal" class="form-control">
-                @if ($item->status == 'Pending')
+                
                 <button type="submit" class="btn btn-success mb-2 mt-2">Konfirmasi</button>
-                @endif
+                  </form>
                 <form action="/bookingadmin/{bookingadmin}/konfirmasi" method="post" enctype="multipart/form-data">
                   @csrf 
                   <input style="display: none;" type="text" hidden name="id" value="{{ $item->id }}" class="form-control">
                   <input style="display: none;" type="text" hidden name="status" value="Reject" class="form-control">
-              @if ($item->status == 'Pending')
+              
               <button type="submit" class="btn btn-danger mb-2">Reject</button>
+            </form>
               @endif
                   </td>        
                   </tr>  
