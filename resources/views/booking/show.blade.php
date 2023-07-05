@@ -116,8 +116,8 @@ background-color:#eee;
                                         <td>{{ $booking->jam }}</td>
 
                                         {{-- <td class="text-end">@currency($data->stok * $data->harga_barang)</td> --}}
-                                        <td>@currency ($booking->total_harga )</td>
-                                        <td>@currency ( $booking->total_harga*$booking->jam )</td>
+                                        <td>@currency ($booking->lapangan->harga )</td>
+                                        <td>@currency ( $booking->lapangan->harga*$booking->jam )</td>
 
                                         {{-- <td>{{ $data->keterangan }}</td> --}}
 
