@@ -58,7 +58,7 @@
                   <td style="color :red">Belum melakukan pembayaraan</td>
                   @else
                   {{-- <td><img src="{{asset('storage/img/' . $item->bukti)}}" alt="foto" width="100px"></td> --}}
-                  <td style="color: green">Sudah melakukan pembayaraan</td>
+                  <td style="color: green">{{ $item->pembayaraan }}</td>
                   @endif
                 
                   <td>{{ $item->time_from }}</td>  
