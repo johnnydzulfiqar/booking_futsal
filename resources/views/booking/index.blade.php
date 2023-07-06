@@ -91,6 +91,8 @@
                             ><i class="bx bx-edit-alt me-2"></i> Detail</a>
                             <a class="dropdown-item" href="{{ url("/booking/$item->id/invoice")}}"
                               ><i class="bx bx-edit-alt me-2"></i> Invoice</a>
+                              <a class="dropdown-item" href="https://wa.me/+6285245000321" style="color: red"
+                                ><i class="bx bx-edit-alt me-2"></i>CANCEL BOOKING</a>
                       </div>
                     </div>
                   </form>

@@ -70,7 +70,7 @@
 
                   <td>
 
-                    <form action="{{ url('/bookingadmin/$item->id') }}" method="POST">
+                    <form action="{{ url("/bookingadmin/$item->id") }}" method="POST">
                       @csrf
                       @method('delete')
                     <div class="dropdown">
