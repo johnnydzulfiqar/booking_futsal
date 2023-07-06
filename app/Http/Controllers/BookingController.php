@@ -167,6 +167,8 @@ class BookingController extends Controller
                 'user_id' => Auth::id(),
                 'jam' => $jam,
                 'total_harga' => $total,
+                'pembayaraan' => $request['pembayaraan'],
+
             ]
         );
 
@@ -305,7 +307,7 @@ class BookingController extends Controller
                     // 'user_id' => Auth::id(),
                     'jam' => $jam,
                     'total_harga' => $total,
-
+                    'pembayaraan' => $request['pembayaraan'],
                     // $input
 
                 ]);
@@ -322,6 +324,7 @@ class BookingController extends Controller
                 'status' => 'Pending',
                 'jam' => $jam,
                 'total_harga' => $total,
+                'pembayaraan' => $request['pembayaraan'],
             ]);
         }
 

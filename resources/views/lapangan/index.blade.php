@@ -39,7 +39,7 @@
                   <td>{{ $item->harga }}</td>
                   <td>{{ $item->status }}</td>  
                   <td>
-                    <form action="/lapangan/{{  $item->id }}" method="POST">
+                    <form action="{{ url("/lapangan/$item->id") }}" method="POST">
                       @csrf
                       @method('delete')
                     <div class="dropdown">
@@ -47,7 +47,7 @@
                         Action
                       </button>
                       <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                        <a class="dropdown-item" href="/lapangan/{{ $item->id }}/edit"
+                        <a class="dropdown-item" href="{{ url("/lapangan/$item->id/edit") }}"
                           ><i class="bx bx-edit-alt me-2"></i> Edit</a>
                           {{-- <input type="submit" class="btn btn-danger btn-sm" value="delete"> --}}
                       </div>

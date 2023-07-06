@@ -25,6 +25,7 @@ return new class extends Migration
             $table->string('status')->nullable();
             $table->integer('jam');
             $table->integer('total_harga');
+            $table->string('pembayaraan')->nullable();
             $table->timestamps();
         });
     }

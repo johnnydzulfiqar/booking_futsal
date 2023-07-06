@@ -32,10 +32,10 @@
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
             @if ( auth()->user()->type == 'admin') 
-                                    <a class="dropdown-item" href="/admin/{{ Auth::user()->id }}/edit" class="d-block">Profile</a>
+                                    <a class="dropdown-item" href="{{ url('/admin/'. Auth::user()->id . '/edit' ) }}" class="d-block">Profile</a>
                                     @endif
                                     @if ( auth()->user()->type == 'user') 
-                                    <a class="dropdown-item" href="/user/{{ Auth::user()->id }}/edit" class="d-block">Profile</a>
+                                    <a class="dropdown-item" href="{{ url('/user/' . Auth::user()->id . '/edit' ) }}" class="d-block">Profile</a>
                                     @endif
                                     
             <a class="dropdown-item" href="{{ route('logout') }}"

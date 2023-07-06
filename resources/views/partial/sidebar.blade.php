@@ -1,10 +1,10 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     @if ( auth()->user()->type == 'admin') 
-    <a href="/admin/index" class="brand-link">
+    <a href="{{ url('/admin/index') }}" class="brand-link">
       @endif
       @if ( auth()->user()->type == 'user') 
-      <a href="/booking/index" class="brand-link">
+      <a href="{{ url('/booking/index') }}" class="brand-link">
         @endif
       <img src="{{ asset('layout/dist/img/logofutsal.jpg') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
       <span class="brand-text font-weight-light">Queen Futsal</span>
@@ -19,10 +19,10 @@
         </div>
         <div class="info">
           @if ( auth()->user()->type == 'admin') 
-          <a href="/admin/{{ Auth::user()->id }}/edit" class="d-block">{{ Auth::user()->name }}</a>
+          <a href="{{ url('/admin/' . Auth::user()->id ) . '/edit'}}" class="d-block">{{ Auth::user()->name }}</a>
           @endif
           @if ( auth()->user()->type == 'user') 
-          <a href="/user/{{ Auth::user()->id }}/edit" class="d-block">{{ Auth::user()->name }}</a>
+          <a href="{{ url('/user/' . Auth::user()->id . '/edit') }}" class="d-block">{{ Auth::user()->name }}</a>
           @endif
         </div>
       </div>
@@ -48,10 +48,10 @@
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 @if ( auth()->user()->type == 'user') 
-                <a href="/booking/index" class="nav-link active">
+                <a href="{{ url('/booking/index') }}" class="nav-link active">
                   @endif
                   @if ( auth()->user()->type == 'admin') 
-                  <a href="/dashboard" class="nav-link active">
+                  <a href="{{ url('/dashboard') }}" class="nav-link active">
                     @endif
                   <i class="nav-icon fas fa-tachometer-alt"></i>
                   <p>Dashboard</p>
@@ -70,11 +70,11 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="/booking/index" class="nav-link">
+                <a href="{{ url('/booking/index') }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Index Booking</p>
                 </a>
-                <a href="/booking/jadwal" class="nav-link">
+                <a href="{{ url('/booking/jadwal') }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Jadwal Booking</p>
                 </a>
@@ -95,13 +95,13 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="/admin/index" class="nav-link">
+                <a href="{{ url('/admin/index') }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Index User</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/admin/create" class="nav-link">
+                <a href="{{ url('/admin/create') }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Add User</p>
                 </a>
@@ -119,7 +119,7 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="/lapangan/index" class="nav-link">
+                <a href="{{ url('/lapangan/index') }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Index Lapangan</p>
                 </a>
@@ -138,11 +138,11 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="/bookingadmin/index" class="nav-link">
+                <a href="{{ url('/bookingadmin/index') }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Index Booking</p>
                 </a>
-                <a href="/bookingadmin/jadwal" class="nav-link">
+                <a href="{{ url('/bookingadmin/jadwal') }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Jadwal Booking</p>
                 </a>

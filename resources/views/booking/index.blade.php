@@ -22,7 +22,7 @@
             <a class="btn btn-primary mb-3" href="/booking/create" role="button">Booking Baru</a>
             @endif --}}
 
-            <form method="GET" action="/booking/filter">
+            <form method="GET" action="{{ url('/booking/filter') }}">
               <div class="row pb-3">
             <div class="col-md-3">
               <label>Start date</label>
@@ -63,10 +63,10 @@
                   <td>{{ $item->user->name }}</td>
                   <td>{{ $item->lapangan->nama }}</td>
                   @if (is_null($item->bukti))
-                  <td><a href="/booking/{{ $item->id }}/edit">Belum Bayar DP</a></td>
+                  <td><a href="{{ url("/booking/$item->id/edit")}}">Belum Bayar DP</a></td>
                   @else
                   {{-- <td><img src="{{asset('storage/img/' . $item->bukti)}}" alt="foto" width="100px"></td> --}}
-                  <td>Sudah Bayar DP</td>
+                  <td>{{ $item->pembayaraan }}</td>
                   @endif
                 
                   <td>{{ Carbon\Carbon::parse($item->time_from)->format('d-M-Y H:00') }}</td>  
@@ -78,7 +78,7 @@
 
                   <td>
                     @if ($item->status=='Masuk Jadwal')
-                    <form action="/booking/{{  $item->id }}" method="POST">
+                    <form action="{{ url("/booking/$item->id")}}" method="POST">
                       @csrf
                       @method('delete')
                     <div class="dropdown">
@@ -87,9 +87,9 @@
                       </button>
                       <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
                         
-                          <a class="dropdown-item" href="/booking/{{ $item->id }}/show"
+                          <a class="dropdown-item" href="{{ url("/booking/$item->id/show") }}"
                             ><i class="bx bx-edit-alt me-2"></i> Detail</a>
-                            <a class="dropdown-item" href="/booking/{{ $item->id }}/invoice"
+                            <a class="dropdown-item" href="{{ url("/booking/$item->id/invoice")}}"
                               ><i class="bx bx-edit-alt me-2"></i> Invoice</a>
                       </div>
                     </div>
@@ -101,16 +101,16 @@
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
                      
-                        <a class="dropdown-item" href="/booking/{{ $item->id }}/show"
+                        <a class="dropdown-item" href="{{ url("/booking/$item->id/show") }}"
                           ><i class="bx bx-edit-alt me-2"></i> Detail</a>
-                          <a class="dropdown-item" href="/booking/{{ $item->id }}/edit"
+                          <a class="dropdown-item" href="{{ url("/booking/$item->id/edit") }}"
                             ><i class="bx bx-edit-alt me-2"></i> Edit</a>
                           
                     </div>
                   </div>
 
                 @endif  
-                <form action="/booking/{{ $item->id }}" method="POST">
+                <form action="{{ url("/booking/$item->id") }}" method="POST">
                   @csrf 
                   @method('delete')
               @if ($item->status == 'Belum Bayar DP')

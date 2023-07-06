@@ -126,10 +126,25 @@ font-style: italic;
           @endif
           <span class="badge badge-info">Batas Pembayaran {{ \Carbon\Carbon::parse($booking->created_at)->modify('+1 hour')->format('j F, Y, H:i:s') }}</span>
           <label for="foto_barang" class="">Bayar DP sebesar 50% : @currency ( $booking->total_harga/2) </label>
+          <label for="foto_barang" class="">Atau Bayar Lunas sebesar  : @currency ( $booking->total_harga) </label>
+
           <label>Ke Rekening BRI : 01110022 </label><br>
           <label>Atas Nama : Meiliani Ajang </label>
 
           <input type="file" class="form-control" name="bukti" id="bukti" placeholder="bukti">
+
+          <div class="form-check mt-3">
+            <input class="form-check-input" type="radio" name="pembayaraan" id="pembayaraan" value="Bayar DP" checked>
+            <label class="form-check-label" for="flexRadioDefault1">
+              Bayar DP
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="pembayaraan" id="pembayaraan" value="Bayar Lunas">
+            <label class="form-check-label" for="flexRadioDefault2">
+              Bayar Lunas
+            </label>
+          </div>
           </div>
       </div>
       @error('bukti')

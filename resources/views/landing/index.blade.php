@@ -40,7 +40,7 @@
                     <div class="text-center">
                         <h1 class="mx-auto my-0 text-uppercase">Queen Futsal Center</h1>
                         <h2 class="text-white-50 mx-auto mt-2 mb-5">Best Futsal Center In Bandung</h2>
-                        <a class="btn btn-primary" href="/booking/create">Booking Now</a>
+                        <a class="btn btn-primary" href="{{ url('/login') }}">Booking Now</a>
                     </div>
                 </div>
             </div>

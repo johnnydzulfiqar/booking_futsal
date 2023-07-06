@@ -19,6 +19,8 @@ class Booking extends Model
         'user_id',
         'status',
         'bukti',
+        'pembayaraan',
+
 
     ];
     public function getFotoBarangAttribute()

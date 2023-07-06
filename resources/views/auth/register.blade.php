@@ -100,7 +100,7 @@
         </div>
       </form>
 
-      <a href="/login" class="text-center">Saya sudah punya akun</a>
+      <a href="{{ ('/login') }}" class="text-center">Saya sudah punya akun</a>
     </div>
     <!-- /.form-box -->
   </div><!-- /.card -->

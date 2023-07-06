@@ -55,10 +55,10 @@
                   <td>{{ $item->user->name }}</td>
                   <td>{{ $item->lapangan->nama }}</td>
                   @if (is_null($item->bukti))
-                  <td style="color :red">Belum Bayar DP</td>
+                  <td style="color :red">Belum melakukan pembayaraan</td>
                   @else
                   {{-- <td><img src="{{asset('storage/img/' . $item->bukti)}}" alt="foto" width="100px"></td> --}}
-                  <td style="color: green">Sudah Bayar DP</td>
+                  <td style="color: green">Sudah melakukan pembayaraan</td>
                   @endif
                 
                   <td>{{ $item->time_from }}</td>  
@@ -70,7 +70,7 @@
 
                   <td>
 
-                    <form action="/bookingadmin/{{ $item->id }}" method="POST">
+                    <form action="{{ url('/bookingadmin/$item->id') }}" method="POST">
                       @csrf
                       @method('delete')
                     <div class="dropdown">
@@ -80,21 +80,21 @@
                       <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
                         {{-- <a class="dropdown-item" href="/bookingadmin/{{ $item->id }}/edit">
                           <i class="bx bx-edit-alt me-2"></i> Edit</a> --}}
-                          <a class="dropdown-item" href="/bookingadmin/{{ $item->id }}/show">
+                          <a class="dropdown-item" href="{{ url("/bookingadmin/$item->id/show") }}">
                             <i class="bx bx-edit-alt me-2"></i> show</a>
                             <input type="submit" class="btn btn-danger btn-sm" value="delete">
                       </div>
                     </div>
                   </form>
                   @if ($item->status == 'Pending')
-                  <form action="/bookingadmin/{bookingadmin}/konfirmasi" method="post" enctype="multipart/form-data">
+                  <form action="{{ url("/bookingadmin/bookingadmin/konfirmasi") }}" method="post" enctype="multipart/form-data">
                     @csrf 
                     <input style="display: none;" type="text" hidden name="id" value="{{ $item->id }}" class="form-control">
                     <input style="display: none;" type="text" hidden name="status" value="Masuk Jadwal" class="form-control">
                 
                 <button type="submit" class="btn btn-success mb-2 mt-2">Konfirmasi</button>
                   </form>
-                <form action="/bookingadmin/{bookingadmin}/konfirmasi" method="post" enctype="multipart/form-data">
+                <form action="{{ url("/bookingadmin/bookingadmin/konfirmasi") }}" method="post" enctype="multipart/form-data">
                   @csrf 
                   <input style="display: none;" type="text" hidden name="id" value="{{ $item->id }}" class="form-control">
                   <input style="display: none;" type="text" hidden name="status" value="Reject" class="form-control">
