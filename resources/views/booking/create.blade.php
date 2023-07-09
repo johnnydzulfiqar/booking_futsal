@@ -125,8 +125,8 @@ font-style: italic;
       </button> <br>
           @endif
           <span class="badge badge-info">Batas Pembayaran {{ \Carbon\Carbon::parse($booking->created_at)->modify('+1 hour')->format('j F, Y, H:i:s') }}</span>
-          <label for="foto_barang" class="">Bayar DP sebesar 50% : @currency ( $booking->total_harga/2) </label>
-          <label for="foto_barang" class="">Atau Bayar Lunas sebesar  : @currency ( $booking->total_harga) </label>
+          <label for="foto_barang" class="">Bayar DP sebesar 50% : <span id="dp">@currency ( $booking->total_harga/2)</span></label>
+          <label for="foto_barang" class="">Atau Bayar Lunas sebesar : <span id="total">@currency ( $booking->total_harga)</span></label>
 
           <label>Ke Rekening BRI : 01110022 </label><br>
           <label>Atas Nama : Meiliani Ajang </label>
@@ -211,6 +211,30 @@ font-style: italic;
             var currWidth = GFG.clientWidth;
             GFG.style.width = (currWidth - 100) + "px";
         }
+        $('.datetimepicker').on('dp.change', e => {
+          const timefrom = moment($('#time_from').val());
+          const timeto = moment($('#time_to').val());
+
+
+          const start = +timefrom.format('H');
+          const end = +timeto.format('H');
+
+          const harga = @js($data->harga);
+
+          let total = 0;
+          for (let i = start; i < end; i++) {
+            if (i < 15) {
+                total += +harga;
+            } else if (i >= 15 && i < 18) {
+                total += (+harga + 50000);
+            } else {
+                total += (+harga + 100000);
+            }
+          }
+
+          $('#total').text('Rp. ' + Intl.NumberFormat().format(total));
+          $('#dp').text('Rp. ' + Intl.NumberFormat().format(total/2));
+        })
               </script>
   {{-- </div> --}}
 @endsection
