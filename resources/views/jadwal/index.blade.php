@@ -144,6 +144,8 @@ li {
                                             </div>
                                         @enderror
                                     </div>
+                                    <label for="total" class="">Total Bayar : <span id="total">@currency ( $data->harga)</span></label>
+
                                     <div class="row p-2">
                                         <button type="submit" class="btn btn-primary">Send</button>
                                     </div>
@@ -209,6 +211,29 @@ li {
         stepping: 10,
         disabledHours: [0, 1, 2, 3, 4, 5, 6]
     });
+    $('.datetimepicker').on('dp.change', e => {
+          const timefrom = moment($('#time_from').val());
+          const timeto = moment($('#time_to').val());
 
+
+          const start = +timefrom.format('H');
+          const end = +timeto.format('H');
+
+          const harga = @js($data->harga);
+
+          let total = 0;
+          for (let i = start; i < end; i++) {
+            if (i < 15) {
+                total += +harga;
+            } else if (i >= 15 && i < 18) {
+                total += (+harga + 50000);
+            } else {
+                total += (+harga + 100000);
+            }
+          }
+
+          $('#total').text('Rp. ' + Intl.NumberFormat().format(total));
+          $('#dp').text('Rp. ' + Intl.NumberFormat().format(total/2));
+        })
     </script>
 @endsection

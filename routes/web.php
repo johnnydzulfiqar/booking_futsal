@@ -24,6 +24,7 @@ use App\Http\Controllers\DashboardController;
 |
 */
 
+// Auth::routes(['verify' => true]);
 Auth::routes();
 Route::get('/', [HomeController::class, 'jadwal'])->name('home');
 Route::get('/home', [BookingController::class, 'index']);
