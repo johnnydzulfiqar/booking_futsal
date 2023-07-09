@@ -73,7 +73,7 @@ font-style: italic;
               <!-- List with bullets -->
                 <ul class="list-bullets">
                     <li class="mb-2"> Jam 7-12 : @currency($data->harga)</li>
-                    <li class="mb-2"> Jam 13-18 : @currency($data->harga+50000)</li>
+                    <li class="mb-2"> Jam 15-18 : @currency($data->harga+50000)</li>
                     <li class="mb-2">Jam 19-23 : @currency($data->harga+100000)</li>
                 </ul>
             <form>
