@@ -176,10 +176,6 @@
                   <i class="far fa-circle nav-icon"></i>
                   <p>Index Booking</p>
                 </a>
-                <a href="{{ url('/pemilik/jadwal') }}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Jadwal Booking</p>
-                </a>
               </li>
             
               
