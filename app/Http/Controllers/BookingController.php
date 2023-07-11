@@ -161,26 +161,46 @@ class BookingController extends Controller
         //     'jam' => $jam,
         //     'total_harga' => $total,
         // ]);
+        if (Auth::id() == 1) {
+            $data = Booking::create(
+                [
+                    'lapangan_id' => $request['lapangan_id'],
+                    'time_from' => $request['time_from'],
+                    'time_to' => $request['time_to'],
+                    'status' => 'Masuk Jadwal',
+                    'bukti' => 'Lunas',
+                    'user_id' => Auth::id(),
+                    'jam' => $jam,
+                    'total_harga' => $total,
+                    'pembayaraan' => 'Lunas',
 
-        $data = Booking::create(
-            [
-                'lapangan_id' => $request['lapangan_id'],
-                'time_from' => $request['time_from'],
-                'time_to' => $request['time_to'],
-                'status' => 'Belum Bayar DP',
-                'bukti' => null,
-                'user_id' => Auth::id(),
-                'jam' => $jam,
-                'total_harga' => $total,
-                'pembayaraan' => $request['pembayaraan'],
 
-            ]
-        );
+                ]
+            );
+        } else {
+            $data = Booking::create(
+                [
+                    'lapangan_id' => $request['lapangan_id'],
+                    'time_from' => $request['time_from'],
+                    'time_to' => $request['time_to'],
+                    'status' => 'Belum Bayar DP',
+                    'bukti' => null,
+                    'user_id' => Auth::id(),
+                    'jam' => $jam,
+                    'total_harga' => $total,
+                    'pembayaraan' => $request['pembayaraan'],
+                ]
+            );
+        }
+
 
         ProcessBooking::dispatch($data)
             ->delay(now()->addHour());
-
-        return redirect('/booking/index')->with('success', 'Data Berhasil Disimpan');
+        if (Auth::id() == 1) {
+            return redirect('/bookingadmin/index')->with('success', 'Data Berhasil Disimpan');
+        } else {
+            return redirect('/booking/index')->with('success', 'Data Berhasil Disimpan');
+        }
     }
     public function show($id)
     {

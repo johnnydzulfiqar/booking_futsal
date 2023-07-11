@@ -70,6 +70,8 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
     Route::post('/bookingadmin/{bookingadmin}/konfirmasi', [BookingAdminController::class, 'konfirmasi']);
     Route::get('/bookingadmin/{bookingadmin}/show', [BookingAdminController::class, 'show'])->name('booking.show');
+    Route::get('/bookingadmin/create', [BookingController::class, 'create'])->name('booking.create');
+    Route::post('/bookingadmin/create', [BookingController::class, 'store']);
 });
 Route::middleware(['auth', 'user-access:pemilik'])->group(function () {
     Route::get('/pemilik/index', [BookingAdminController::class, 'index'])->name('pemilik.index');

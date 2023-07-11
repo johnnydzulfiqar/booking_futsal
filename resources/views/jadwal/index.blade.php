@@ -99,7 +99,12 @@ li {
                   </div>
                 @else
                 <div class="modal-body">
+                    @if ( auth()->user()->type == 'user') 
                     <form action="{{ url('booking/create')}}" method="POST">
+                    @endif
+                    @if ( auth()->user()->type == 'admin') 
+                    <form action="{{ url('bookingadmin/create')}}" method="POST">
+                    @endif
                         @csrf
                         <div class="col-xxl">
                             <div class="card mb-5">
