@@ -51,6 +51,21 @@
                       </div>
                     </div>
                   </form>
+                  @elseif($item->type=='pemilik')
+                  <form action="{{ url("/admin/$item->id") }}" method="POST">
+                    @csrf
+                    @method('delete')
+                  <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      Action
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                      <a class="dropdown-item" href="{{ url("/admin/$item->id/edit") }}"
+                        ><i class="bx bx-edit-alt me-2"></i> Edit</a>
+                    
+                    </div>
+                  </div>
+                </form>
                   @else
                   <form action="{{ url("/admin/$item->id") }}" method="POST">
                     @csrf

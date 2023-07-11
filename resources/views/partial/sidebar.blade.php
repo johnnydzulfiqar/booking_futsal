@@ -6,6 +6,9 @@
       @if ( auth()->user()->type == 'user') 
       <a href="{{ url('/booking/index') }}" class="brand-link">
         @endif
+        @if ( auth()->user()->type == 'pemilik') 
+      <a href="{{ url('/pemilik/index') }}" class="brand-link">
+        @endif
       <img src="{{ asset('layout/dist/img/logofutsal.jpg') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
       <span class="brand-text font-weight-light">Queen Futsal</span>
     </a>
@@ -23,6 +26,9 @@
           @endif
           @if ( auth()->user()->type == 'user') 
           <a href="{{ url('/user/' . Auth::user()->id . '/edit') }}" class="d-block">{{ Auth::user()->name }}</a>
+          @endif
+          @if ( auth()->user()->type == 'pemilik') 
+          <a href="{{ url('/pemilik/' . Auth::user()->id . '/edit') }}" class="d-block">{{ Auth::user()->name }}</a>
           @endif
         </div>
       </div>
@@ -53,6 +59,9 @@
                   @if ( auth()->user()->type == 'admin') 
                   <a href="{{ url('/dashboard') }}" class="nav-link active">
                     @endif
+                    @if ( auth()->user()->type == 'pemilik') 
+                    <a href="{{ url('/pemilik/dashboard') }}" class="nav-link active">
+                      @endif
                   <i class="nav-icon fas fa-tachometer-alt"></i>
                   <p>Dashboard</p>
                 </a>
@@ -143,6 +152,31 @@
                   <p>Index Booking</p>
                 </a>
                 <a href="{{ url('/bookingadmin/jadwal') }}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Jadwal Booking</p>
+                </a>
+              </li>
+            
+              
+            </ul>
+          </li>
+          @endif
+          @if ( auth()->user()->type == 'pemilik') 
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-table"></i>
+              <p>
+                Management Booking
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{ url('/pemilik/index') }}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Index Booking</p>
+                </a>
+                <a href="{{ url('/pemilik/jadwal') }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Jadwal Booking</p>
                 </a>

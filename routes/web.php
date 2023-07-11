@@ -71,3 +71,8 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
     Route::post('/bookingadmin/{bookingadmin}/konfirmasi', [BookingAdminController::class, 'konfirmasi']);
     Route::get('/bookingadmin/{bookingadmin}/show', [BookingAdminController::class, 'show'])->name('booking.show');
 });
+Route::middleware(['auth', 'user-access:pemilik'])->group(function () {
+    Route::get('/pemilik/index', [BookingAdminController::class, 'index'])->name('pemilik.index');
+    Route::get('/pemilik/dashboard', [DashboardController::class, 'index'])->name('dashboard.pemilik');
+    Route::get('/pemilik/filter', [BookingAdminController::class, 'filter']);
+});

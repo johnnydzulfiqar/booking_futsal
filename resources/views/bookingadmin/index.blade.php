@@ -15,7 +15,12 @@
           </div>
           <!-- /.card-header -->
           <div class="card-body">
-            <form method="GET" action="/admin/filter">
+            @if ( auth()->user()->type == 'admin')
+            <form method="GET" action="{{ url("/admin/filter") }}">
+            @endif
+            @if ( auth()->user()->type == 'pemilik')
+            <form method="GET" action="{{ url("/pemilik/filter") }}">
+            @endif
               <div class="row pb-3">
             <div class="col-md-3">
               <label>Start date</label>
@@ -69,7 +74,7 @@
 
 
                   <td>
-
+                    @if ( auth()->user()->type == 'admin')
                     <form action="{{ url("/bookingadmin/$item->id") }}" method="POST">
                       @csrf
                       @method('delete')
@@ -101,6 +106,9 @@
               
               <button type="submit" class="btn btn-danger mb-2">Reject</button>
             </form>
+              @endif
+              @else
+              -
               @endif
                   </td>        
                   </tr>  

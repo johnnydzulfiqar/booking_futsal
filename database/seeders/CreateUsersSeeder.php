@@ -32,6 +32,14 @@ class CreateUsersSeeder extends Seeder
                 'alamat' => 'Kalimantan',
 
             ],
+            [
+                'name' => 'Pemilik',
+                'email' => 'pemilik@gmail.com',
+                'type' => 2,
+                'password' => bcrypt('12345'),
+                'alamat' => 'Queen Futsal',
+
+            ],
         ];
 
         foreach ($users as $key => $user) {
