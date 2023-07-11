@@ -24,8 +24,8 @@ use App\Http\Controllers\DashboardController;
 |
 */
 
-Auth::routes(['verify' => true]);
-// Auth::routes();
+// Auth::routes(['verify' => true]);
+Auth::routes();
 Route::get('/', [HomeController::class, 'jadwal'])->name('home');
 Route::get('/home', [BookingController::class, 'index']);
 Route::middleware(['auth', 'user-access:user'])->group(function () {

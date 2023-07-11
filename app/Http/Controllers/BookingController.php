@@ -20,10 +20,10 @@ use function PHPUnit\Framework\isNull;
 
 class BookingController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware(['auth', 'verified']);
-    }
+    // public function __construct()
+    // {
+    //     $this->middleware(['auth', 'verified']);
+    // }
     public function index(Request $request)
     {
         $booking = Booking::all();
