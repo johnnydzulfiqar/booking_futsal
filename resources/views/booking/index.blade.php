@@ -96,8 +96,26 @@
                       </div>
                     </div>
                   </form>
+                  @elseif($item->status=='Selesai')
+                  <form action="{{ url("/booking/$item->id")}}" method="POST">
+                    @csrf
+                    @method('delete')
+                  <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      Action
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                      
+                        <a class="dropdown-item" href="{{ url("/booking/$item->id/show") }}"
+                          ><i class="bx bx-edit-alt me-2"></i> Detail</a>
+                          <a class="dropdown-item" href="{{ url("/booking/$item->id/invoice")}}"
+                            ><i class="bx bx-edit-alt me-2"></i> Invoice</a>
+                            <a class="dropdown-item" href="https://wa.me/+6285245000321" style="color: red"
+                              ><i class="bx bx-edit-alt me-2"></i>CANCEL BOOKING</a>
+                    </div>
+                  </div>
+                </form>
                   @else
-                  
                     <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                       Action
                     </button>

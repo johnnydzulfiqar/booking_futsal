@@ -124,8 +124,11 @@ font-style: italic;
           Zoom-Out
       </button> <br>
           @endif
-          <span class="badge badge-info">Batas Pembayaran {{ \Carbon\Carbon::parse($booking->created_at)->modify('+1 hour')->format('j F, Y, H:i:s') }}</span>
+          <span class="badge badge-info">Batas Pembayaran {{ \Carbon\Carbon::parse($booking->created_at)->modify('+1 hour')->format('j F, Y, H:i:s') }}</span><br>
+          <span class="badge badge-info">*Apabila melebihi batas waktu maka booking dibatalkan</span>
           <label for="foto_barang" class="">Bayar DP sebesar 50% : <span id="dp">@currency ( $booking->total_harga/2)</span></label>
+          <label for="foto_barang" class="">Sisa Bayar : <span id="dp">@currency ( $booking->total_harga/2)</span></label>
+
           <label for="foto_barang" class="">Atau Bayar Lunas sebesar : <span id="total">@currency ( $booking->total_harga)</span></label>
 
           <label>Ke Rekening BRI : 01110022 </label><br>

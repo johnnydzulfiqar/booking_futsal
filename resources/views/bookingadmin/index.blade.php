@@ -106,10 +106,21 @@
               
               <button type="submit" class="btn btn-danger mb-2">Reject</button>
             </form>
-              @endif
+            @endif
+            @if ($item->status == 'Masuk Jadwal')
+              <form action="{{ url("/bookingadmin/bookingadmin/konfirmasi") }}" method="post" enctype="multipart/form-data">
+                @csrf 
+                <input style="display: none;" type="text" hidden name="id" value="{{ $item->id }}" class="form-control">
+                <input style="display: none;" type="text" hidden name="status" value="Selesai" class="form-control">
+            
+            <button type="submit" class="btn btn-success mb-2 mt-2">Selesai</button>
+              </form>
+              @endif  
+              
               @else
               -
               @endif
+             
                   </td>        
                   </tr>  
                         
