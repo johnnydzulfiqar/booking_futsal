@@ -161,7 +161,7 @@ class BookingController extends Controller
         //     'jam' => $jam,
         //     'total_harga' => $total,
         // ]);
-        if (Auth::id() == 1) {
+        if (Auth::user()->type == 1) {
             $data = Booking::create(
                 [
                     'lapangan_id' => $request['lapangan_id'],
@@ -183,7 +183,7 @@ class BookingController extends Controller
                     'lapangan_id' => $request['lapangan_id'],
                     'time_from' => $request['time_from'],
                     'time_to' => $request['time_to'],
-                    'status' => 'Belum Bayar DP',
+                    'status' => 'Belum Bayar',
                     'bukti' => null,
                     'user_id' => Auth::id(),
                     'jam' => $jam,
@@ -193,10 +193,13 @@ class BookingController extends Controller
             );
         }
 
-
+        // ProcessBooking::dispatch($data)
+        //     ->delay(now()->addHour());
         ProcessBooking::dispatch($data)
-            ->delay(now()->addHour());
-        if (Auth::id() == 1) {
+            ->delay(now()->addMinutes(15));
+        // ProcessBooking::dispatch($data)
+        //     ->delay($time_to > now());
+        if (Auth::user()->type == 1) {
             return redirect('/bookingadmin/index')->with('success', 'Data Berhasil Disimpan');
         } else {
             return redirect('/booking/index')->with('success', 'Data Berhasil Disimpan');
@@ -373,5 +376,12 @@ class BookingController extends Controller
         $orderDate = date('Y-m-d H:i:s');
         $paymentDue = (new \DateTime($orderDate))->modify('+1 hour')->format('Y-m-d H:i:s');
         return view('booking.invoice2', compact('data'));
+    }
+    public function konfirmasi(Booking $id, Request $request)
+    {
+        $data = Booking::find($request->id);
+        $data->status = $request->status;
+        $data->save();
+        return redirect('/booking/index');
     }
 }

@@ -10,6 +10,7 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 
+
 class ProcessBooking implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
@@ -31,8 +32,11 @@ class ProcessBooking implements ShouldQueue
      */
     public function handle()
     {
-        if ($this->booking->status === 'Belum Bayar DP') {
+        if ($this->booking->status === 'Belum Bayar') {
             $this->booking->delete();
         }
+        // if ($this->booking->Carbon::now > $this->booking->time_to) {
+        //     $this->booking->status == "Selesai";
+        // }
     }
 }

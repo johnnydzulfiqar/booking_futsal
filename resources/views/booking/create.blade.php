@@ -124,7 +124,7 @@ font-style: italic;
           Zoom-Out
       </button> <br>
           @endif
-          <span class="badge badge-info">Batas Pembayaran {{ \Carbon\Carbon::parse($booking->created_at)->modify('+1 hour')->format('j F, Y, H:i:s') }}</span><br>
+          <span class="badge badge-info">Batas Pembayaran {{ \Carbon\Carbon::parse($booking->created_at)->modify('+15 minutes')->format('j F, Y, H:i:s') }}</span><br>
           <span class="badge badge-info">*Apabila melebihi batas waktu maka booking dibatalkan</span>
           <label for="foto_barang" class="">Bayar DP sebesar 50% : <span id="dp">@currency ( $booking->total_harga/2)</span></label>
           <label for="foto_barang" class="">Sisa Bayar : <span id="dp">@currency ( $booking->total_harga/2)</span></label>
@@ -136,14 +136,14 @@ font-style: italic;
 
           <input type="file" class="form-control" name="bukti" id="bukti" placeholder="bukti">
 
-          <div class="form-check mt-3">
+          {{-- <div class="form-check mt-3">
             <input class="form-check-input" type="radio" name="pembayaraan" id="pembayaraan" value="Bayar DP" checked>
             <label class="form-check-label" for="flexRadioDefault1">
               Bayar DP
             </label>
-          </div>
-          <div class="form-check">
-            <input class="form-check-input" type="radio" name="pembayaraan" id="pembayaraan" value="Bayar Lunas">
+          </div> --}}
+          <div class="form-check mt-3">
+            <input class="form-check-input" type="radio" name="pembayaraan" id="pembayaraan" value="Bayar Lunas" checked>
             <label class="form-check-label" for="flexRadioDefault2">
               Bayar Lunas
             </label>
