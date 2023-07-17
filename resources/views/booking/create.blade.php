@@ -126,10 +126,10 @@ font-style: italic;
           @endif
           <span class="badge badge-info">Batas Pembayaran {{ \Carbon\Carbon::parse($booking->created_at)->modify('+15 minutes')->format('j F, Y, H:i:s') }}</span><br>
           <span class="badge badge-info">*Apabila melebihi batas waktu maka booking dibatalkan</span>
-          <label for="foto_barang" class="">Bayar DP sebesar 50% : <span id="dp">@currency ( $booking->total_harga/2)</span></label>
-          <label for="foto_barang" class="">Sisa Bayar : <span id="dp">@currency ( $booking->total_harga/2)</span></label>
+          {{-- <label for="foto_barang" class="">Bayar DP sebesar 50% : <span id="dp">@currency ( $booking->total_harga/2)</span></label> --}}
+          {{-- <label for="foto_barang" class="">Sisa Bayar : <span id="dp">@currency ( $booking->total_harga/2)</span></label> --}}
 
-          <label for="foto_barang" class="">Atau Bayar Lunas sebesar : <span id="total">@currency ( $booking->total_harga)</span></label>
+          <label for="foto_barang" class="">Bayar Lunas sebesar : <span id="total">@currency ( $booking->total_harga)</span></label>
 
           <label>Ke Rekening BRI : 01110022 </label><br>
           <label>Atas Nama : Meiliani Ajang </label>

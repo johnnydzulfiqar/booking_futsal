@@ -89,7 +89,7 @@ background-color:#eee;
                     <!-- end row -->
                     
                     <div class="py-2">
-                        <h5 class="font-size-15">Laporan barang Summary</h5>
+                        <h5 class="font-size-15">Transaksi Detail</h5>
 
                         <div class="table-responsive">
                             <table class="table align-middle table-nowrap table-centered mb-0">

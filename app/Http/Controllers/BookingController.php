@@ -196,7 +196,7 @@ class BookingController extends Controller
         // ProcessBooking::dispatch($data)
         //     ->delay(now()->addHour());
         ProcessBooking::dispatch($data)
-            ->delay(now()->addMinutes(15));
+            ->delay(now()->addMinutes(2));
         // ProcessBooking::dispatch($data)
         //     ->delay($time_to > now());
         if (Auth::user()->type == 1) {

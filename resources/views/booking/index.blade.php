@@ -63,7 +63,7 @@
                   <td>{{ $item->user->name }}</td>
                   <td>{{ $item->lapangan->nama }}</td>
                   @if (is_null($item->bukti))
-                  <td><a href="{{ url("/booking/$item->id/edit")}}">Belum Bayar DP</a></td>
+                  <td><a href="{{ url("/booking/$item->id/edit")}}">Belum Bayar</a></td>
                   @else
                   {{-- <td><img src="{{asset('storage/img/' . $item->bukti)}}" alt="foto" width="100px"></td> --}}
                   <td>{{ $item->pembayaraan }}</td>
