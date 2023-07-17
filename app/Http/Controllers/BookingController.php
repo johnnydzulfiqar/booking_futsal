@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\CompleteBooking;
 use App\Jobs\ProcessBooking;
 use App\Models\Lapangan;
 use App\Models\Booking;
@@ -197,8 +198,8 @@ class BookingController extends Controller
         //     ->delay(now()->addHour());
         ProcessBooking::dispatch($data)
             ->delay(now()->addMinutes(15));
-        // ProcessBooking::dispatch($data)
-        //     ->delay($time_to > now());
+        CompleteBooking::dispatch($data->id, 0)
+            ->delay(Carbon::parse($data->time_to));
         if (Auth::user()->type == 1) {
             return redirect('/bookingadmin/index')->with('success', 'Data Berhasil Disimpan');
         } else {
@@ -337,6 +338,7 @@ class BookingController extends Controller
                     'total_harga' => $total,
                     'pembayaraan' => $request['pembayaraan'],
                     // $input
+                    'complete' => $booking->complete + 1,
 
                 ]);
             } else {
@@ -353,8 +355,12 @@ class BookingController extends Controller
                 'jam' => $jam,
                 'total_harga' => $total,
                 'pembayaraan' => $request['pembayaraan'],
+                'complete' => $booking->complete + 1,
             ]);
         }
+
+        CompleteBooking::dispatch($booking->id, $booking->complete)
+            ->delay(Carbon::parse($booking->time_to));
 
         return redirect('/booking/index');
     }

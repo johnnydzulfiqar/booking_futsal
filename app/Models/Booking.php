@@ -20,7 +20,7 @@ class Booking extends Model
         'status',
         'bukti',
         'pembayaraan',
-
+        'complete'
 
     ];
     public function getFotoBarangAttribute()
