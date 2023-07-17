@@ -13,7 +13,7 @@
             <div class="inner">
               <h3>{{ $bookingpending }}</h3>
 
-              <p>Booking Belum Bayar DP</p>
+              <p>Booking Belum Bayar</p>
             </div>
             <div class="icon">
               <i class="ion ion-bag"></i>
@@ -28,7 +28,7 @@
             <div class="inner">
               <h3>{{ $booking }}</h3>
 
-              <p>Booking Sudah Bayar DP</p>
+              <p>Booking Sudah Bayar</p>
             </div>
             <div class="icon">
               <i class="ion ion-stats-bars"></i>

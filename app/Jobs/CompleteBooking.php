@@ -35,7 +35,7 @@ class CompleteBooking implements ShouldQueue
         $booking = Booking::find($this->id);
         if ($booking) {
             if ($booking->complete == $this->complete) {
-                $booking->status = 'Completed';
+                $booking->status = 'Selesai';
                 $booking->save();
             }
         }

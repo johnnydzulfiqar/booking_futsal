@@ -23,7 +23,9 @@ class DashboardController extends Controller
         $userCount = User::count();
         $bookingpending = Booking::where('status', '=', 'Belum Bayar DP')->count();
         $booking = Booking::where('status', '=', 'Masuk Jadwal')->count();
-        $income = Booking::where('status', '=', 'Masuk Jadwal')->sum('total_harga');
+        $income = Booking::where('status', 'Masuk Jadwal')
+            ->orWhere('status', 'Selesai')
+            ->sum('total_harga');
 
         return view('dashboard.index', compact('userCount', 'bookingpending', 'booking', 'income'));
     }
