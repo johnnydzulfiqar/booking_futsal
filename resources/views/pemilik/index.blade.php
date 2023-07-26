@@ -47,7 +47,7 @@
                   <th>Jam</th>
                   <th>Harga</th>
                   <th>Status</th>
-                  <th>Action</th>
+                  {{-- <th>Action</th> --}}
 
                 </tr>
                 </thead>
@@ -72,56 +72,7 @@
                   <td>@currency ( $item->total_harga )</td>    
                   <td>{{ $item->status }}</td>    
 
-
-                  <td>
-                    @if ( auth()->user()->type == 'admin')
-                    <form action="{{ url("/bookingadmin/$item->id") }}" method="POST">
-                      @csrf
-                      @method('delete')
-                    <div class="dropdown">
-                      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Action
-                      </button>
-                      <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                        {{-- <a class="dropdown-item" href="/bookingadmin/{{ $item->id }}/edit">
-                          <i class="bx bx-edit-alt me-2"></i> Edit</a> --}}
-                          <a class="dropdown-item" href="{{ url("/bookingadmin/$item->id/show") }}">
-                            <i class="bx bx-edit-alt me-2"></i> show</a>
-                            <input type="submit" class="btn btn-danger btn-sm" value="delete">
-                      </div>
-                    </div>
-                  </form>
-                  @if ($item->status == 'Pending')
-                  <form action="{{ url("/bookingadmin/bookingadmin/konfirmasi") }}" method="post" enctype="multipart/form-data">
-                    @csrf 
-                    <input style="display: none;" type="text" hidden name="id" value="{{ $item->id }}" class="form-control">
-                    <input style="display: none;" type="text" hidden name="status" value="Masuk Jadwal" class="form-control">
-                
-                <button type="submit" class="btn btn-success mb-2 mt-2">Konfirmasi</button>
-                  </form>
-                <form action="{{ url("/bookingadmin/bookingadmin/konfirmasi") }}" method="post" enctype="multipart/form-data">
-                  @csrf 
-                  <input style="display: none;" type="text" hidden name="id" value="{{ $item->id }}" class="form-control">
-                  <input style="display: none;" type="text" hidden name="status" value="Reject" class="form-control">
-              
-              <button type="submit" class="btn btn-danger mb-2">Reject</button>
-            </form>
-            @endif
-            @if ($item->status == 'Masuk Jadwal')
-              <form action="{{ url("/bookingadmin/bookingadmin/konfirmasi") }}" method="post" enctype="multipart/form-data">
-                @csrf 
-                <input style="display: none;" type="text" hidden name="id" value="{{ $item->id }}" class="form-control">
-                <input style="display: none;" type="text" hidden name="status" value="Selesai" class="form-control">
-            
-            <button type="submit" class="btn btn-success mb-2 mt-2">Selesai</button>
-              </form>
-              @endif  
-              
-              @else
-              -
-              @endif
-             
-                  </td>        
+ 
                   </tr>  
                         
                   @endforeach
@@ -137,7 +88,7 @@
                   <th>Jam</th>
                   <th>Harga</th>
                   <th>Status</th>
-                  <th>Action</th>
+                  {{-- <th>Action</th> --}}
 
                 </tr>
                 </tfoot>

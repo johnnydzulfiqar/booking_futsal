@@ -23,6 +23,12 @@ class BookingAdminController extends Controller
         $data = Booking::all()->first();
         return view('bookingadmin.index', compact('booking', 'data'));
     }
+    public function indexpemilik(Request $request)
+    {
+        $booking = Booking::all();
+        $data = Booking::all()->first();
+        return view('pemilik.index', compact('booking', 'data'));
+    }
     public function filter(Request $request)
     {
         $start_date = $request->start_date;

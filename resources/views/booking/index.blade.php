@@ -42,8 +42,8 @@
                 <tr>
                   {{-- <th>No</th> --}}
                   <th>Booking AN</th>
-                  <th>Lapangan</th>
-                  <th>Bukti</th>
+                  {{-- <th>Lapangan</th> --}}
+                  <th>Pembayaraan</th>
                   <th>Mulai</th>
                   <th>Selesai</th>
                   <th>Jam</th>
@@ -61,7 +61,7 @@
                                 
                   {{-- <td>{{ $loop->iteration }}</td> --}}
                   <td>{{ $item->user->name }}</td>
-                  <td>{{ $item->lapangan->nama }}</td>
+                  {{-- <td>{{ $item->lapangan->nama }}</td> --}}
                   @if (is_null($item->bukti))
                   <td><a href="{{ url("/booking/$item->id/edit")}}">Belum Bayar</a></td>
                   @else
@@ -101,7 +101,7 @@
                     @csrf 
                     <input style="display: none;" type="text" hidden name="id" value="{{ $item->id }}" class="form-control">
                     <input style="display: none;" type="text" hidden name="status" value="Batal" class="form-control">
-                <button type="submit" class="btn btn-danger mb-2">Batal</button>
+                <button type="submit" class="btn btn-danger mb-2" onclick="return myFunction();">Batal</button>
               </form>
                   @elseif($item->status=='Selesai')
                   <form action="{{ url("/booking/$item->id")}}" method="POST">
@@ -154,8 +154,8 @@
                 <tr>
                   {{-- <th>No</th> --}}
                   <th>Booking AN</th>
-                  <th>Lapangan</th>
-                  <th>Bukti</th>
+                  {{-- <th>Lapangan</th> --}}
+                  <th>Pembayaraan</th>
                   <th>Mulai</th>
                   <th>Selesai</th>
                   <th>Jam</th>
@@ -177,4 +177,10 @@
   </div>
   <!-- /.container-fluid -->
 </section>
+<script>
+  function myFunction() {
+      if(!confirm("Uang akan hangus bila dibatalkan"))
+      event.preventDefault();
+  }
+ </script>
 @endsection
