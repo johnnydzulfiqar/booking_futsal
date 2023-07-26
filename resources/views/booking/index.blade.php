@@ -42,8 +42,8 @@
                 <tr>
                   {{-- <th>No</th> --}}
                   <th>Booking AN</th>
-                  <th>Lapangan</th>
-                  <th>Bukti</th>
+                  {{-- <th>Lapangan</th> --}}
+                  <th>Pembayaraan</th>
                   <th>Mulai</th>
                   <th>Selesai</th>
                   <th>Jam</th>
@@ -61,7 +61,7 @@
                                 
                   {{-- <td>{{ $loop->iteration }}</td> --}}
                   <td>{{ $item->user->name }}</td>
-                  <td>{{ $item->lapangan->nama }}</td>
+                  {{-- <td>{{ $item->lapangan->nama }}</td> --}}
                   @if (is_null($item->bukti))
                   <td><a href="{{ url("/booking/$item->id/edit")}}">Belum Bayar DP</a></td>
                   @else
@@ -147,8 +147,8 @@
                 <tr>
                   {{-- <th>No</th> --}}
                   <th>Booking AN</th>
-                  <th>Lapangan</th>
-                  <th>Bukti</th>
+                  {{-- <th>Lapangan</th> --}}
+                  <th>Pembayaraan</th>
                   <th>Mulai</th>
                   <th>Selesai</th>
                   <th>Jam</th>

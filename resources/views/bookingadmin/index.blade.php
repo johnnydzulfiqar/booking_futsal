@@ -40,14 +40,20 @@
                 <tr>
                   <th>No</th>
                   <th>Booking Atas Nama</th>
-                  <th>Lapangan</th>
-                  <th>Bukti</th>
+                  {{-- <th>Lapangan</th> --}}
+                  <th>Pembayaraan</th>
                   <th>Mulai</th>
                   <th>Selesai</th>
                   <th>Jam</th>
                   <th>Harga</th>
                   <th>Status</th>
+                  @if ( auth()->user()->type == 'admin')
                   <th>Action</th>
+                  @endif
+                  @if ( auth()->user()->type == 'user')
+                  <th>Action</th>
+                  @endif
+                  <th>-</th>
 
                 </tr>
                 </thead>
@@ -58,7 +64,7 @@
                                 
                   <td>{{ $loop->iteration }}</td>
                   <td>{{ $item->user->name }}</td>
-                  <td>{{ $item->lapangan->nama }}</td>
+                  {{-- <td>{{ $item->lapangan->nama }}</td> --}}
                   @if (is_null($item->bukti))
                   <td style="color :red">Belum melakukan pembayaraan</td>
                   @else
@@ -118,7 +124,7 @@
               @endif  
               
               @else
-              -
+              
               @endif
              
                   </td>        
@@ -130,15 +136,20 @@
                 <tr>
                   <th>No</th>
                   <th>Booking Atas Nama </th>
-                  <th>Lapangan</th>
-                  <th>Bukti</th>
+                  {{-- <th>Lapangan</th> --}}
+                  <th>Pembayaraan</th>
                   <th>Mulai</th>
                   <th>Selesai</th>
                   <th>Jam</th>
                   <th>Harga</th>
                   <th>Status</th>
+                  @if ( auth()->user()->type == 'admin')
                   <th>Action</th>
-
+                  @endif
+                  @if ( auth()->user()->type == 'user')
+                  <th>Action</th>
+                  @endif
+                  <th>-</th>
                 </tr>
                 </tfoot>
             </table>
