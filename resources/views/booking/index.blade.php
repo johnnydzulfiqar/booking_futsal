@@ -63,7 +63,7 @@
                   <td>{{ $item->user->name }}</td>
                   {{-- <td>{{ $item->lapangan->nama }}</td> --}}
                   @if (is_null($item->bukti))
-                  <td><a href="{{ url("/booking/$item->id/edit")}}">Belum Bayar DP</a></td>
+                  <td><a href="{{ url("/booking/$item->id/edit")}}">Belum Bayar</a></td>
                   @else
                   {{-- <td><img src="{{asset('storage/img/' . $item->bukti)}}" alt="foto" width="100px"></td> --}}
                   <td>{{ $item->pembayaraan }}</td>
@@ -81,7 +81,7 @@
                     <form action="{{ url("/booking/$item->id")}}" method="POST">
                       @csrf
                       @method('delete')
-                    <div class="dropdown">
+                    <div class="dropdown mb-3">
                       <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Action
                       </button>
@@ -91,11 +91,18 @@
                             ><i class="bx bx-edit-alt me-2"></i> Detail</a>
                             <a class="dropdown-item" href="{{ url("/booking/$item->id/invoice")}}"
                               ><i class="bx bx-edit-alt me-2"></i> Invoice</a>
-                              <a class="dropdown-item" href="https://wa.me/+6285245000321" style="color: red"
-                                ><i class="bx bx-edit-alt me-2"></i>CANCEL BOOKING</a>
+                              {{-- <a class="dropdown-item" href="https://wa.me/+6285245000321" style="color: red"
+                                ><i class="bx bx-edit-alt me-2"></i>CANCEL BOOKING</a> --}}
                       </div>
                     </div>
+                    
                   </form>
+                  <form action="{{ url("/booking/booking/konfirmasi") }}" method="post" enctype="multipart/form-data">
+                    @csrf 
+                    <input style="display: none;" type="text" hidden name="id" value="{{ $item->id }}" class="form-control">
+                    <input style="display: none;" type="text" hidden name="status" value="Batal" class="form-control">
+                <button type="submit" class="btn btn-danger mb-2" onclick="return myFunction();">Batal</button>
+              </form>
                   @elseif($item->status=='Selesai')
                   <form action="{{ url("/booking/$item->id")}}" method="POST">
                     @csrf
@@ -110,8 +117,8 @@
                           ><i class="bx bx-edit-alt me-2"></i> Detail</a>
                           <a class="dropdown-item" href="{{ url("/booking/$item->id/invoice")}}"
                             ><i class="bx bx-edit-alt me-2"></i> Invoice</a>
-                            <a class="dropdown-item" href="https://wa.me/+6285245000321" style="color: red"
-                              ><i class="bx bx-edit-alt me-2"></i>CANCEL BOOKING</a>
+                            {{-- <a class="dropdown-item" href="https://wa.me/+6285245000321" style="color: red"
+                              ><i class="bx bx-edit-alt me-2"></i>CANCEL BOOKING</a> --}}
                     </div>
                   </div>
                 </form>
@@ -133,7 +140,7 @@
                 <form action="{{ url("/booking/$item->id") }}" method="POST">
                   @csrf 
                   @method('delete')
-              @if ($item->status == 'Belum Bayar DP')
+              @if ($item->status == 'Belum Bayar')
               <input type="submit" class="btn btn-danger mt-2" value="Batal">
               @endif
             </form>
@@ -170,4 +177,10 @@
   </div>
   <!-- /.container-fluid -->
 </section>
+<script>
+  function myFunction() {
+      if(!confirm("Uang akan hangus bila dibatalkan"))
+      event.preventDefault();
+  }
+ </script>
 @endsection

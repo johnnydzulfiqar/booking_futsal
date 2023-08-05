@@ -9,9 +9,9 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Carbon;
 
-
-class ProcessBooking implements ShouldQueue
+class CompleteBooking implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
@@ -20,7 +20,7 @@ class ProcessBooking implements ShouldQueue
      *
      * @return void
      */
-    public function __construct(public Booking $booking)
+    public function __construct(public $id, public int $complete)
     {
         //
     }
@@ -32,14 +32,12 @@ class ProcessBooking implements ShouldQueue
      */
     public function handle()
     {
-        $booking = Booking::find($this->booking->id);
+        $booking = Booking::find($this->id);
         if ($booking) {
-            if ($this->booking->status === 'Belum Bayar') {
-                $this->booking->delete();
+            if ($booking->complete == $this->complete) {
+                $booking->status = 'Selesai';
+                $booking->save();
             }
         }
-        // if ($this->booking->Carbon::now > $this->booking->time_to) {
-        //     $this->booking->status == "Selesai";
-        // }
     }
 }

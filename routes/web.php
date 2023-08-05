@@ -43,6 +43,7 @@ Route::middleware(['auth', 'user-access:user'])->group(function () {
     Route::get('/booking/{booking}/invoice', [BookingController::class, 'invoice']);
     Route::get('/booking/{booking}/invoice2', [BookingController::class, 'invoice2']);
     Route::delete('/booking/{booking}', [BookingController::class, 'destroy'])->name(name: 'booking.delete');
+    Route::post('/booking/{booking}/konfirmasi', [BookingController::class, 'konfirmasi']);
 });
 
 Route::middleware(['auth', 'user-access:admin'])->group(function () {
@@ -74,7 +75,7 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
     Route::post('/bookingadmin/create', [BookingController::class, 'store']);
 });
 Route::middleware(['auth', 'user-access:pemilik'])->group(function () {
-    Route::get('/pemilik/index', [BookingAdminController::class, 'index'])->name('pemilik.index');
+    Route::get('/pemilik/index', [BookingAdminController::class, 'indexpemilik'])->name('pemilik.index');
     Route::get('/pemilik/dashboard', [DashboardController::class, 'index'])->name('dashboard.pemilik');
     Route::get('/pemilik/filter', [BookingAdminController::class, 'filter']);
 });

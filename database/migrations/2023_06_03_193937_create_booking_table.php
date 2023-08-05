@@ -26,6 +26,7 @@ return new class extends Migration
             $table->integer('jam');
             $table->integer('total_harga');
             $table->string('pembayaraan')->nullable();
+            $table->integer('complete')->default(0);
             $table->timestamps();
         });
     }
