@@ -73,10 +73,10 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
     Route::get('/bookingadmin/{bookingadmin}/show', [BookingAdminController::class, 'show'])->name('booking.show');
     Route::get('/bookingadmin/create', [BookingController::class, 'create'])->name('booking.create');
     Route::post('/bookingadmin/create', [BookingController::class, 'store']);
-    Route::get('/bookingadmin/laporan', [BookingController::class, 'laporan']);
 });
 Route::middleware(['auth', 'user-access:pemilik'])->group(function () {
     Route::get('/pemilik/index', [BookingAdminController::class, 'indexpemilik'])->name('pemilik.index');
     Route::get('/pemilik/dashboard', [DashboardController::class, 'index'])->name('dashboard.pemilik');
     Route::get('/pemilik/filter', [BookingAdminController::class, 'filter']);
+    Route::get('/pemilik/laporan', [BookingController::class, 'laporan']);
 });

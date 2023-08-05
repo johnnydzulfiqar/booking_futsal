@@ -77,8 +77,7 @@
       </thead>
       <tbody>
         @foreach ($data as $item)
-        @auth
-        @if ($user_id = Auth::user()->id === $item->user_id)  
+        
         <tr>
                       
         {{-- <td>{{ $loop->iteration }}</td> --}}
@@ -100,8 +99,6 @@
 
         
         </tr>  
-        @endif
-        @endauth          
         @endforeach
       </tbody>
       <tfoot>

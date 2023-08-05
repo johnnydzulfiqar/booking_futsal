@@ -35,6 +35,11 @@
             </div>
           </div>
           </form>
+          <form method="GET" action="{{ url("/pemilik/laporan") }}">
+          <div class="" style="margin: 5px 0px 10px 0px">
+            <button type="submit" class="btn btn-primary">Rekap</button>
+          </div>
+          </form>
             <table id="example1" class="table table-bordered table-striped">
               <thead>
                 <tr>
