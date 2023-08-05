@@ -162,7 +162,7 @@ class BookingController extends Controller
         //     'jam' => $jam,
         //     'total_harga' => $total,
         // ]);
-        if (Auth::user()->type == 1) {
+        if (Auth::user()->type == 'admin') {
             $data = Booking::create(
                 [
                     'lapangan_id' => $request['lapangan_id'],
@@ -173,7 +173,7 @@ class BookingController extends Controller
                     'user_id' => Auth::id(),
                     'jam' => $jam,
                     'total_harga' => $total,
-                    'pembayaraan' => 'Lunas',
+                    'pembayaraan' => 'Cash Lunas',
 
 
                 ]
@@ -200,7 +200,7 @@ class BookingController extends Controller
             ->delay(now()->addMinutes(15));
         CompleteBooking::dispatch($data->id, 0)
             ->delay(Carbon::parse($data->time_to));
-        if (Auth::user()->type == 1) {
+        if (Auth::user()->type == 'admin') {
             return redirect('/bookingadmin/index')->with('success', 'Data Berhasil Disimpan');
         } else {
             return redirect('/booking/index')->with('success', 'Data Berhasil Disimpan');
@@ -389,5 +389,10 @@ class BookingController extends Controller
         $data->status = $request->status;
         $data->save();
         return redirect('/booking/index');
+    }
+    public function laporan()
+    {
+        $data = Booking::all();
+        return view('pemilik.laporan', compact('data'));
     }
 }
