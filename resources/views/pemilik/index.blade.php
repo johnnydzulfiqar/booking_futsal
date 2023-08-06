@@ -35,10 +35,12 @@
             </div>
           </div>
           </form>
-          <form method="GET" action="{{ url("/pemilik/laporanoffline") }}">
+          <form method="GET" action="{{ url("/pemilik/laporan") }}">
           <div class="" style="margin: 5px 0px 10px 0px">
             <button type="submit" class="btn btn-primary">Rekap Booking Online</button>
           </div>
+        </form>
+        <form method="GET" action="{{ url("/pemilik/laporanoffline") }}">
           <div class="" style="margin: 5px 0px 10px 0px">
             <button type="submit" class="btn btn-primary">Rekap Booking Offline</button>
           </div>
