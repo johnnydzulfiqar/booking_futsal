@@ -395,4 +395,10 @@ class BookingController extends Controller
         $data = Booking::all();
         return view('pemilik.laporan', compact('data'));
     }
+    public function laporanoffline(Booking $user)
+    {
+        $data = Booking::where('user_id', '1')
+            ->get();
+        return view('pemilik.laporanoffline', compact('data'));
+    }
 }

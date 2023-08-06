@@ -79,4 +79,5 @@ Route::middleware(['auth', 'user-access:pemilik'])->group(function () {
     Route::get('/pemilik/dashboard', [DashboardController::class, 'index'])->name('dashboard.pemilik');
     Route::get('/pemilik/filter', [BookingAdminController::class, 'filter']);
     Route::get('/pemilik/laporan', [BookingController::class, 'laporan']);
+    Route::get('/pemilik/laporanoffline', [BookingController::class, 'laporanoffline']);
 });
