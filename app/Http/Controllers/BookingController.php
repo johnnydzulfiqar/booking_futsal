@@ -392,12 +392,13 @@ class BookingController extends Controller
     }
     public function laporan()
     {
-        $data = Booking::all();
+        $data = Booking::where('pembayaraan', 'Bayar Lunas')
+            ->get();
         return view('pemilik.laporan', compact('data'));
     }
     public function laporanoffline(Booking $user)
     {
-        $data = Booking::where('user_id', '1')
+        $data = Booking::where('pembayaraan', 'Cash Lunas')
             ->get();
         return view('pemilik.laporanoffline', compact('data'));
     }

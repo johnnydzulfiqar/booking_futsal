@@ -54,7 +54,7 @@
     <img src="{{ asset('layout/dist/img/logofutsal.jpg') }}" alt="AdminLTE Logo" width="150px" height="150px">
     <div class="title" style="text-align: center;">
         <h3>QUEEN FUTSAL</h3>
-        <h3>Transaksi Online</h3>
+        <h3>Transaksi Offline</h3>
       <p>Jl. Brigadir Jend. Katamso No.66, Cihaur Geulis, Kec. Cibeunying Kidul, Kota Bandung, Jawa Barat 40122</p> 
     </div>
 </div>
