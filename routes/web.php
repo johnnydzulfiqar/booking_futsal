@@ -44,7 +44,7 @@ Route::middleware(['auth', 'user-access:user'])->group(function () {
     Route::get('/booking/{booking}/invoice2', [BookingController::class, 'invoice2']);
     Route::delete('/booking/{booking}', [BookingController::class, 'destroy'])->name(name: 'booking.delete');
     Route::post('/booking/{booking}/konfirmasi', [BookingController::class, 'konfirmasi']);
-    Route::get('/dashboarduser', [DashboardController::class, 'index_user'])->name('dashboard.index');
+    Route::get('/dashboarduser', [DashboardController::class, 'index_user'])->name('dashboarduser.index_user');
 });
 
 Route::middleware(['auth', 'user-access:admin'])->group(function () {

@@ -54,7 +54,7 @@ class LoginController extends Controller
             } else if (auth()->user()->type == 'pemilik') {
                 return redirect()->route('dashboard.pemilik');
             } else {
-                return redirect()->route('booking.index');
+                return redirect()->route('dashboarduser.index_user');
             }
         } else {
             return back()->withErrors([
