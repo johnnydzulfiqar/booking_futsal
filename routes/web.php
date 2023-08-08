@@ -44,6 +44,7 @@ Route::middleware(['auth', 'user-access:user'])->group(function () {
     Route::get('/booking/{booking}/invoice2', [BookingController::class, 'invoice2']);
     Route::delete('/booking/{booking}', [BookingController::class, 'destroy'])->name(name: 'booking.delete');
     Route::post('/booking/{booking}/konfirmasi', [BookingController::class, 'konfirmasi']);
+    Route::get('/dashboarduser', [DashboardController::class, 'index_user'])->name('dashboard.index');
 });
 
 Route::middleware(['auth', 'user-access:admin'])->group(function () {
@@ -62,6 +63,7 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
     Route::delete('/lapangan/{lapangan}', [LapanganController::class, 'destroy'])->name(name: 'lapangan.delete');
     Route::get('/lapangan/{lapangan}/show', [LapanganController::class, 'show'])->name('lapangan.show');
     Route::get('/bookingadmin/index', [BookingAdminController::class, 'index'])->name('bookingadmin.index');
+    Route::get('/bookingadmin/indexoffline', [BookingAdminController::class, 'indexoffline'])->name('bookingadmin.index_offline');
     Route::get('/bookingadmin/{booking}/edit', [BookingAdminController::class, 'edit'])->name(name: 'bookingadmin.edit');
     Route::patch('/bookingadmin/{booking}', [BookingAdminController::class, 'update'])->name(name: 'bookingadmin.update');
     Route::delete('/bookingadmin/{booking}', [BookingAdminController::class, 'destroy'])->name(name: 'bookingadmin.delete');
@@ -76,6 +78,7 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
 });
 Route::middleware(['auth', 'user-access:pemilik'])->group(function () {
     Route::get('/pemilik/index', [BookingAdminController::class, 'indexpemilik'])->name('pemilik.index');
+    Route::get('/pemilik/indexoffline', [BookingAdminController::class, 'indexpemilikoffline'])->name('pemilik.index_offline');
     Route::get('/pemilik/dashboard', [DashboardController::class, 'index'])->name('dashboard.pemilik');
     Route::get('/pemilik/filter', [BookingAdminController::class, 'filter']);
     Route::get('/pemilik/laporan', [BookingController::class, 'laporan']);

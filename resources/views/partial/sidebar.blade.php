@@ -54,7 +54,7 @@
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 @if ( auth()->user()->type == 'user') 
-                <a href="{{ url('/booking/index') }}" class="nav-link active">
+                <a href="{{ url('/dashboarduser') }}" class="nav-link active">
                   @endif
                   @if ( auth()->user()->type == 'admin') 
                   <a href="{{ url('/dashboard') }}" class="nav-link active">
@@ -149,7 +149,11 @@
               <li class="nav-item">
                 <a href="{{ url('/bookingadmin/index') }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Index Booking</p>
+                  <p>Index Booking Online</p>
+                </a>
+                <a href="{{ url('/bookingadmin/indexoffline') }}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Index Booking Offline</p>
                 </a>
                 <a href="{{ url('/bookingadmin/jadwal') }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
@@ -175,6 +179,10 @@
                 <a href="{{ url('/pemilik/index') }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Index Booking</p>
+                </a>
+                <a href="{{ url('/pemilik/indexoffline') }}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Index Booking Offline</p>
                 </a>
               </li>
             

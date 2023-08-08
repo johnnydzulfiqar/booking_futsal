@@ -31,4 +31,12 @@ class DashboardController extends Controller
 
         return view('dashboard.index', compact('userCount', 'bookingpending', 'booking', 'income'));
     }
+    public function index_user()
+    {
+        $user_id = Auth::user()->id;
+        $data = Booking::where('user_id', '=',  $user_id)
+            // ->orWhere('status', 'Selesai')
+            ->count();
+        return view('dashboard.index_user', compact('data'));
+    }
 }

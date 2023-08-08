@@ -19,15 +19,31 @@ class BookingAdminController extends Controller
 {
     public function index(Request $request)
     {
-        $booking = Booking::all();
+        $booking = Booking::where('pembayaraan', 'Bayar Lunas')
+            ->get();
+        $data = Booking::all()->first();
+        return view('bookingadmin.index', compact('booking', 'data'));
+    }
+    public function indexoffline(Request $request)
+    {
+        $booking = Booking::where('pembayaraan', 'Cash Lunas')
+            ->get();
         $data = Booking::all()->first();
         return view('bookingadmin.index', compact('booking', 'data'));
     }
     public function indexpemilik(Request $request)
     {
-        $booking = Booking::all();
+        $booking = Booking::where('pembayaraan', 'Bayar Lunas')
+            ->get();
         $data = Booking::all()->first();
         return view('pemilik.index', compact('booking', 'data'));
+    }
+    public function indexpemilikoffline(Request $request)
+    {
+        $booking = Booking::where('pembayaraan', 'Cash Lunas')
+            ->get();
+        $data = Booking::all()->first();
+        return view('pemilik.index_offline', compact('booking', 'data'));
     }
     public function filter(Request $request)
     {
